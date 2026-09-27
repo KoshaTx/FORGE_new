@@ -1,0 +1,66 @@
+{
+  "schema_version": "forge.legacy_cleanup_verification.v1",
+  "base_head": "c2ce57a4c42585d5844b5f9f1f728b6aa97e5936",
+  "randomness_used": false,
+  "seed": null,
+  "duplicate_implementations_removed": 5,
+  "private_exports_removed": 19,
+  "whole_modules_deleted": 0,
+  "active_implementation_lines_removed_net": 95,
+  "archived_bytes_added": 330701,
+  "historical_export_retained": [
+    {
+      "consumer": "results/phase1/ugi_semantic_candidate_support_audit_v1/audit.py",
+      "line": 21,
+      "module": "forge.model.synthesis_program_sampling",
+      "symbol": "_carbon_skeleton_diameter_from_states"
+    }
+  ],
+  "source_hashes": {
+    "experiments/phase1/product_l1/stages.py": "888ea7eb222b3dae340d8fb68495a4c4d58f40181e414a3853fd2de29b393696",
+    "forge/corpus/r0_splits.py": "5269d32c6fe211614ab466f97142d3e898bcf1ed73a78244a3f30d997920d56c",
+    "forge/corpus/r1_prime_audit.py": "1d3b68e7c79fdbe4df7fa062ef659352ef45c1eb0472eca58b04d1b8cafb6ea8",
+    "forge/model/synthesis_program_sampling.py": "4cfd9713c136e114d77d0bc8bd9e6d2084ef1e7427012044352c070c0c135491",
+    "forge/synthesis/assessment/route_awareness.py": "87791793fdddcdf9dba10f0e3a8a86efa4d449cf2a59d3bfff73866a5ebac03b",
+    "forge/synthesis/evidence/ugi3_capability.py": "f2129eba871cdc2571061a8b47e8e3be98c74d5d2094e9d552d9365055d59609",
+    "tools/forge_provenance/pins.py": "ff2b3edfb16085843a9097e2687023ce2b69b266fe276175689774fa54b3ab7b"
+  },
+  "no_training_or_remote_jobs": true,
+  "unrelated_initial_worktree_changes_preserved": true,
+  "deferred": [
+    "Whole-module deletion: no admitted candidates after conservative dynamic-reference and historical-pin review.",
+    "Legacy Ugi joint sampler: independent reference and historical audit consumer.",
+    "Provenance resolver compatibility facade: surviving historical callers.",
+    "Text and JSON writers with distinct serialization or durability behavior.",
+    "Pre-existing unresolved source identities; no new baseline exceptions admitted."
+  ],
+  "survey_counts": {
+    "blocked": 214,
+    "keep_active": 1256,
+    "keep_historical": 33146,
+    "keep_reference": 361
+  },
+  "survey_unresolved_references": 3774,
+  "survey_sha256": "3321153b01dfb920a8d78cf0547bd99c86b262117d3869081c3c8952cb76d1f5",
+  "survey_inputs_verified_current": true,
+  "receipt_hashes": {
+    "provenance-check.json": "cde803863cd6d56363bcd2c8fbb6f6dc57b2325b9b4dad1aab4ecedc8f8b0d16",
+    "baseline-tests.xml": "bc45c06f3e0a8763aa80ab874bd80901732a35eb9d7fd9b95e010c9ff0428b20",
+    "final-maintenance-tests.xml": "c7f224fc561f2832ae259f48283204fcb850e601561fd9828f6d2fbeb218a369",
+    "core-tests.xml": "95a34cad2d493f0b1ae4c7b9e553754b89598ab996606117fc4c30d2dea875f0",
+    "survey-summary.json": "bd69d32398c4ae9e7f8f2fe5287292dd05bea68c8f575fa439cc33bdd8350f70",
+    "retirements.json": "b98d33cb165127711a4061e2542ab40514e0f6dcaca5878ae63badcb0b009df7",
+    "interface-tests.xml": "c52adb3812fac53a4691c6d552d4d79519a0dd1ca4d03d495b41249660ccef01",
+    "README.md": "ab5b510ab4599c286dcfb85b6268c96dabc6a3cae4a7add535bbf4cd8f737ee8",
+    "archive-before.json": "d0ce1117aa72f3882f7438f17b37b6d25bab1ce544eac0573fb61429e42ac7e6",
+    "baseline.json": "4f0ebc3e984b253112fcbea563a170687b104e73c7f7e58b6da20e7830b10b86",
+    "isolated-tests.xml": "2fc73479e4ae705275bd4a95167046d43a95f55a612dab2a2f37a074c5f314d9",
+    "historical-consumer-review.json": "6908d07e58a8efff66a31aa7fd9c20fd5c8199c165e284b0cd57418db3ccc762",
+    "sampler-equivalence.json": "22d1c4130e0c998c155c1b2576ec4810036c6510feed0cdb73611fdcbc187e08",
+    "survey-tests.xml": "a7a50ab38f3c47cad41d1474cd48455180694f4c35821ed83edf3b3a8d32a593",
+    "verify.py": "79aa297994cd6692441eda2e34989b42f1c248216238f9034cee881252ad67d5",
+    "wheel-check.json": "1203f4754eb3003323df5198ae7556ef5cec8dd0c8eb9a47c1d2bec820c91c5f",
+    "source-identities-before.json.gz": "619d0616e53debe5846d50a60a4b090e59acf848d130677724ba7c75a261cabf",
+    "affected-tests.xml": "fff2fb09aaab8d4575d9a553d83df16b17f3e04ec1211c92e2f7f88445257279"
+  }
+}

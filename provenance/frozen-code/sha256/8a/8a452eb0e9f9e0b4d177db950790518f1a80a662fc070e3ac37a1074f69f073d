@@ -5,15 +5,17 @@ from __future__ import annotations
 import csv
 import datetime as dt
 import json
+import os
 import platform
 import re
+import tempfile
 from collections import Counter
 from pathlib import Path
 from typing import Any
 
 from rdkit import Chem, rdBase
 
-from forge.core.io import atomic_write, read_json_object
+from forge.core.io import read_json_object
 from forge.synthesis.sources.supervision_inventory import sha256_file
 
 CONFIG_SCHEMA_VERSION = "m0_09_ugi3_precursor_capability_config.v2"
@@ -41,7 +43,22 @@ def _portable_path(path: Path) -> str:
 
 
 def _atomic_write_bytes(path: Path, content: bytes) -> None:
-    atomic_write(path, content, mode=0o644)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    descriptor, temporary = tempfile.mkstemp(
+        dir=path.parent,
+        prefix=f".{path.name}.",
+        suffix=".tmp",
+    )
+    temporary_path = Path(temporary)
+    try:
+        os.fchmod(descriptor, 0o644)
+        with os.fdopen(descriptor, "wb") as handle:
+            handle.write(content)
+            handle.flush()
+            os.fsync(handle.fileno())
+        os.replace(temporary_path, path)
+    finally:
+        temporary_path.unlink(missing_ok=True)
 
 
 def _load_json(path: Path, *, label: str) -> dict[str, Any]:

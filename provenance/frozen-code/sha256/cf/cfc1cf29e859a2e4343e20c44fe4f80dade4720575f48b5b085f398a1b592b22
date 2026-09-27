@@ -21,6 +21,9 @@ from experiments.phase1.product_l1._stage_support import (
     _resume_training_work as _resume_training_work,
 )
 from experiments.phase1.product_l1.evaluation_stages import (
+    _ugi_terminal_chemistry_comparison_stage as _ugi_terminal_chemistry_comparison_stage,
+)
+from experiments.phase1.product_l1.evaluation_stages import (
     evaluate_selected_ugi_tree_production_stage as evaluate_selected_ugi_tree_production_stage,
 )
 from experiments.phase1.product_l1.evaluation_stages import (
@@ -52,7 +55,34 @@ from experiments.phase1.product_l1.evaluation_stages import (
 )
 from experiments.phase1.product_l1.sampling_stages import sample_ugi_shards as sample_ugi_shards
 from experiments.phase1.product_l1.semantic_evaluation_stages import (
+    _require_successful_ugi_all_role_semantic_preflight as _require_successful_ugi_all_role_semantic_preflight,
+)
+from experiments.phase1.product_l1.semantic_evaluation_stages import (
     _require_successful_ugi_all_role_semantic_quantitative_preflight as _require_successful_ugi_all_role_semantic_quantitative_preflight,
+)
+from experiments.phase1.product_l1.semantic_evaluation_stages import (
+    _require_successful_ugi_amine_semantic_program_preflight as _require_successful_ugi_amine_semantic_program_preflight,
+)
+from experiments.phase1.product_l1.semantic_evaluation_stages import (
+    _require_successful_ugi_group_balanced_program_prior_preflight as _require_successful_ugi_group_balanced_program_prior_preflight,
+)
+from experiments.phase1.product_l1.semantic_evaluation_stages import (
+    _require_successful_ugi_morphology_diversity_preflight as _require_successful_ugi_morphology_diversity_preflight,
+)
+from experiments.phase1.product_l1.semantic_evaluation_stages import (
+    _ugi_all_role_semantic_adjudication_stage as _ugi_all_role_semantic_adjudication_stage,
+)
+from experiments.phase1.product_l1.semantic_evaluation_stages import (
+    _ugi_all_role_semantic_program_comparison_stage as _ugi_all_role_semantic_program_comparison_stage,
+)
+from experiments.phase1.product_l1.semantic_evaluation_stages import (
+    _ugi_amine_semantic_program_comparison_stage as _ugi_amine_semantic_program_comparison_stage,
+)
+from experiments.phase1.product_l1.semantic_evaluation_stages import (
+    _ugi_group_balanced_program_prior_comparison_stage as _ugi_group_balanced_program_prior_comparison_stage,
+)
+from experiments.phase1.product_l1.semantic_evaluation_stages import (
+    _ugi_morphology_diversity_comparison_stage as _ugi_morphology_diversity_comparison_stage,
 )
 from experiments.phase1.product_l1.semantic_evaluation_stages import (
     evaluate_ugi_all_role_semantic_adjudication_stage as evaluate_ugi_all_role_semantic_adjudication_stage,
@@ -92,6 +122,9 @@ from experiments.phase1.product_l1.semantic_evaluation_stages import (
 )
 from experiments.phase1.product_l1.semantic_evaluation_stages import (
     evaluate_ugi_morphology_diversity_comparison_stage as evaluate_ugi_morphology_diversity_comparison_stage,
+)
+from experiments.phase1.product_l1.specialist_evaluation_stages import (
+    _reaction_specialist_v0_comparison_stage as _reaction_specialist_v0_comparison_stage,
 )
 from experiments.phase1.product_l1.specialist_evaluation_stages import (
     _require_successful_ugi_chemistry_preflight as _require_successful_ugi_chemistry_preflight,

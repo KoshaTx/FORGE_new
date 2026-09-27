@@ -15,8 +15,13 @@ from forge.model._synthesis_sampling.checkpoint import (
 from forge.model._synthesis_sampling.checkpoint import (
     synthesis_program_source_marginals as synthesis_program_source_marginals,
 )
+from forge.model._synthesis_sampling.constraints import _ATOM_CAPACITY_CACHE as _ATOM_CAPACITY_CACHE
+from forge.model._synthesis_sampling.constraints import _BOND_UNIT_CACHE as _BOND_UNIT_CACHE
 from forge.model._synthesis_sampling.constraints import _argmax_allowed as _argmax_allowed
 from forge.model._synthesis_sampling.constraints import _atom_capacity_table as _atom_capacity_table
+from forge.model._synthesis_sampling.constraints import (
+    _available_valence_units as _available_valence_units,
+)
 from forge.model._synthesis_sampling.constraints import _bond_unit_table as _bond_unit_table
 from forge.model._synthesis_sampling.constraints import (
     _carbon_skeleton_diameter_from_states as _carbon_skeleton_diameter_from_states,
@@ -29,6 +34,9 @@ from forge.model._synthesis_sampling.constraints import (
 )
 from forge.model._synthesis_sampling.constraints import (
     _generated_ring_support as _generated_ring_support,
+)
+from forge.model._synthesis_sampling.constraints import (
+    _induced_graph_diameter as _induced_graph_diameter,
 )
 from forge.model._synthesis_sampling.constraints import _sample_allowed as _sample_allowed
 from forge.model._synthesis_sampling.constraints import (
@@ -45,6 +53,9 @@ from forge.model._synthesis_sampling.constraints import (
 )
 from forge.model._synthesis_sampling.constraints import (
     _ugi_ester_motif_constraints as _ugi_ester_motif_constraints,
+)
+from forge.model._synthesis_sampling.constraints import (
+    _ugi_program_from_record as _ugi_program_from_record,
 )
 from forge.model._synthesis_sampling.constraints import (
     _ugi_topology_support_failure as _ugi_topology_support_failure,
@@ -135,12 +146,19 @@ from forge.model._synthesis_sampling.decoder import (
     decode_synthesis_program_strict_topology as decode_synthesis_program_strict_topology,
 )
 from forge.model._synthesis_sampling.state import (
+    _draw_source_categorical as _draw_source_categorical,
+)
+from forge.model._synthesis_sampling.state import _fixed_state_exact as _fixed_state_exact
+from forge.model._synthesis_sampling.state import (
     _fixed_state_exact_records as _fixed_state_exact_records,
 )
 from forge.model._synthesis_sampling.state import (
     _fixed_state_exact_tensor as _fixed_state_exact_tensor,
 )
 from forge.model._synthesis_sampling.state import _initial_state as _initial_state
+from forge.model._synthesis_sampling.state import (
+    _initial_topology_conditioned_chemistry_state as _initial_topology_conditioned_chemistry_state,
+)
 from forge.model._synthesis_sampling.state import _move as _move
 from forge.model._synthesis_sampling.state import _program_conditioning as _program_conditioning
 from forge.model._synthesis_sampling.state import (

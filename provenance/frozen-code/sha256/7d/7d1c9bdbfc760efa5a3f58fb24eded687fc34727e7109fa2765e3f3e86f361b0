@@ -37,7 +37,6 @@ from forge.chemistry.reactive_sites import (
     SYMMETRY_DISTINCT_REQUIRED_HANDLE_MATCHES,
     audit_reactive_site_multiplicity,
 )
-from forge.core.hashing import sha256_file as _core_sha256_file
 from forge.corpus.r0_splits import FOLDS, SCHEMES, load_frozen_r0_splits
 
 LEGACY_CONFIG_SCHEMA_VERSION = "m0_04_r1_prime_audit_config.v2"
@@ -115,11 +114,17 @@ class CompiledReaction:
 
 
 def sha256_file(path: Path, chunk_size: int = 1 << 20) -> str:
-    """Hash a file while retaining the historical missing-input error contract."""
+    """Return a file's SHA-256 digest."""
+
+    digest = hashlib.sha256()
     try:
-        return _core_sha256_file(path, chunk_size=chunk_size)
+        handle = path.open("rb")
     except FileNotFoundError as exc:
         raise AuditError(f"required input not found: {path}") from exc
+    with handle:
+        while block := handle.read(chunk_size):
+            digest.update(block)
+    return digest.hexdigest()
 
 
 def sha256_bytes(payload: bytes) -> str:

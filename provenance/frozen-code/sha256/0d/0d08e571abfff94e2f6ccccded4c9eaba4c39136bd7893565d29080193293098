@@ -443,8 +443,3 @@ clean:
 	find forge cli experiments tools tests -type d -name __pycache__ -empty -delete
 	rm -f paper/*.aux paper/*.blg paper/*.fdb_latexmk paper/*.fls paper/*.log \
 		paper/*.out paper/*.toc paper/*.synctex.gz
-
-.PHONY: code-survey-supported
-code-survey-supported:
-	PYTHONPATH=.:tools:paper $(UV_RUN) python -m forge_maintenance survey \
-		--scope supported-studies --output build/supported_studies_code_survey.json

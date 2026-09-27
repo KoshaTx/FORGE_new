@@ -24097,3 +24097,30 @@ changes no scientific result and makes no manuscript prose revision.
   recorded under `results/maintenance/forge_maintainability_20260926/`. Historical
   results, frozen configs, chemistry definitions, manuscripts, and scientific
   acceptance criteria were not rewritten by this cleanup.
+
+## 2026-09-26 — Retire unused facade exports and duplicate infrastructure
+
+Implemented the supported-studies maintenance survey with separate active, reference, historical,
+unreached, and blocked classifications. Relative/re-export imports, literal dynamic aliases,
+documented paths, historical moves, parse errors, and ambiguous reflection are reported without
+executing application code. The older single-contract command and receipt remain unchanged.
+
+Consolidated five hashing/atomic-write implementations onto forge.core while retaining domain
+errors, historical keyword arguments, serialized bytes, and publication permissions. Removed
+19 private facade exports with no repository consumers outside their owning implementations.
+All 153 catalog entries and 102 stage IDs remain identical. Legacy sampler and provenance
+compatibility interfaces with surviving consumers remain. No whole module is deleted: ambiguous
+reachability and historical source gaps require further adjudication.
+
+Affected, survey, architecture, and both-study checks pass. A 20-case seeded sampler comparison
+retains identical tensors, metadata, RNG state, and traces. A wheel built from an isolated checkout
+resolves both study interfaces from installed project code using locally available dependencies.
+All 30 vendored assets verify. The expanded source baseline has 12,974 identities; all 9,265
+previously resolvable identities remain resolvable. Its 3,709 pre-existing unresolved identities
+remain reported and were not accepted by a new exception rule. All 526 existing archive entries
+are intact, with ten exact pre-edit versions added. Scoped typing and changed-file lint checks pass.
+
+Exact removals, replacements, test receipts, source identities, replay commands, and limitations
+are recorded under `results/maintenance/legacy_cleanup_v1/`. Historical artifacts, scientific
+thresholds, frozen inputs, and unrelated manuscript work were preserved. No training, remote job,
+commit, or push was launched.

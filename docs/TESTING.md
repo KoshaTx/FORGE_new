@@ -93,3 +93,13 @@ Do not enable unrestricted process parallelism without checking shared files, gl
 state, memory use, and output ownership. Faster test selection and faster execution are separate
 claims. Neither changes the chemistry, leakage, full-size representation, provenance, or admission
 requirements for training.
+
+## Legacy retirement checks
+
+`make code-survey-supported` inventories both studies without running workflows. Its exit code 2
+means dynamic references need review, not that code is disposable. See
+[LEGACY_CODE_RETIREMENT.md](LEGACY_CODE_RETIREMENT.md) for classifications and provenance rules.
+Run `make test-one TEST='tests/test_maintenance_code_survey.py tests/test_legacy_cleanup_helpers.py'`
+for survey/helper changes; add the owning subsystem tests for actual removals. Shared-interface
+changes also require `make test-study-compatibility`. Missing historical inputs remain separately
+reported and are never silently counted as passing reproduction.

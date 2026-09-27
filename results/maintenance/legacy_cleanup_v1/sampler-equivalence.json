@@ -1,0 +1,67 @@
+{
+  "after_sha256": "4fc267b8f51accca974ea1a677a15d084219cd48a8b32c8ecca4df9ef355b2b6",
+  "before_sha256": "4fc267b8f51accca974ea1a677a15d084219cd48a8b32c8ecca4df9ef355b2b6",
+  "changed": [],
+  "checks": 20,
+  "current_source_fingerprint": "748307a1db6b484bd9694b9dba11230571795480ed4f2ec549f006f81f815b70",
+  "dependency_context": "baseline sampler and refactored sampler use identical current shared dependencies",
+  "inputs": [
+    {
+      "path": "/private/tmp/forge-legacy-baseline/source/forge/model/synthesis_program_sampling.py",
+      "sha256": "6ce0996dcc444680706bb96140ea49c05347319820dc0134c1a7774a75a73042"
+    },
+    {
+      "path": "/Users/rahulmaganti/Kosha/forge_new/results/maintenance/forge_maintainability_20260926/sampler_equivalence.py",
+      "sha256": "4887cc1f0bf0cccc01c0bc4fa1dd116404455ca3b8401bc42c572c575db60c2f"
+    },
+    {
+      "path": "tests/test_ugi_sampling_trace.py",
+      "sha256": "7216a4a2de3e6b49d8295d0395e52f881a0ba2f7055dc85d64c4092347db37b2"
+    },
+    {
+      "path": "tests/test_fixed_closure_decoding.py",
+      "sha256": "a66bc9aca3fdf5575cd58cdc814a18ba20c9d96e570e86d18f8e1773bbe7692c"
+    },
+    {
+      "path": "forge/model/ugi_sampling_trace.py",
+      "sha256": "a321ecccdb40f4b5b37d116a8a0e8b6e093e50cd02293ef9a8c9264be86a1050"
+    },
+    {
+      "path": "forge/model/synthesis_program_sampling.py",
+      "sha256": "4cfd9713c136e114d77d0bc8bd9e6d2084ef1e7427012044352c070c0c135491"
+    },
+    {
+      "path": "forge/model/_synthesis_sampling/__init__.py",
+      "sha256": "3a9ce3a33d884fdbdd1e254b7049b9b58cdd6081d382b1d4644edc22f4a42dbd"
+    },
+    {
+      "path": "forge/model/_synthesis_sampling/checkpoint.py",
+      "sha256": "0e795d0accbc6df0d2c67b58447f754ee5e8d39e8f550b9e9cc8317253409a6d"
+    },
+    {
+      "path": "forge/model/_synthesis_sampling/constraints.py",
+      "sha256": "9c2bdeb2a0a6b72a548a7ea456a5b7a1b1f9f6671acb17851bfe8b9b1e9b9bd1"
+    },
+    {
+      "path": "forge/model/_synthesis_sampling/contracts.py",
+      "sha256": "93e4467d49600bab8b2865b6db7353241c65811c1aa59ccfb576fb0923d22cf2"
+    },
+    {
+      "path": "forge/model/_synthesis_sampling/decoder.py",
+      "sha256": "1552d760ce78017bca65f05faabc32c196a6818fc5cccf2aa7ac2ecdc5a64776"
+    },
+    {
+      "path": "forge/model/_synthesis_sampling/state.py",
+      "sha256": "43b76860c217c6f7157d81722f9032b369042d18f2c1efab3bea5fea4d2e1074"
+    }
+  ],
+  "remote_calls": 0,
+  "schema_version": "forge.sampler_refactor_equivalence.v1",
+  "seeds": [
+    0,
+    17,
+    77
+  ],
+  "status": "pass",
+  "training_calls": 0
+}

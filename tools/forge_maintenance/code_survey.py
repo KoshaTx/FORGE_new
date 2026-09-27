@@ -3,14 +3,15 @@
 from __future__ import annotations
 
 import ast
+import json
 import re
-from collections import defaultdict, deque
+from collections import Counter, defaultdict, deque
 from pathlib import Path
 from typing import Any
 
 from forge_paper.contract import PaperContract
 from forge_paper.verification import provenance_closure
-from forge_provenance.pins import collect_pins
+from forge_provenance.pins import collect_pins, load_moves
 from forge_provenance.resolver import HistoricalPinArchive
 
 from forge.core.hashing import sha256_file, sha256_tree
@@ -321,3 +322,282 @@ def survey_code(
 
 
 __all__ = ["survey_code"]
+
+
+# This broader inventory intentionally roots every maintained application module: some workflows
+# are direct commands rather than catalog stages. Being unreached is never deletion authorization.
+_SUPPORTED_SOURCE_ROOTS = ("forge", "cli", "experiments", "tools", "tests", "paper", "results")
+_SUPPORTED_DOCUMENT_ROOTS = ("configs", "docs", "paper", "experiments", ".github")
+
+
+def _supported_inputs(repo: Path) -> tuple[Path, ...]:
+    paths: set[Path] = set()
+    for relative in _SUPPORTED_SOURCE_ROOTS:
+        paths.update((repo / relative).rglob("*.py"))
+        paths.update((repo / relative).rglob("*.sh"))
+    for relative in _SUPPORTED_DOCUMENT_ROOTS:
+        paths.update(
+            path
+            for path in (repo / relative).rglob("*")
+            if path.suffix in {".json", ".md", ".txt", ".toml", ".yaml", ".yml"}
+        )
+    paths.update(repo / name for name in ("Makefile", "README.md", "pyproject.toml"))
+    return tuple(
+        sorted(
+            path
+            for path in paths
+            if path.is_file()
+            and not {"__pycache__", ".venv", "venv", "site-packages", ".git"}.intersection(
+                path.parts
+            )
+            and not path.is_symlink()
+        )
+    )
+
+
+def _supported_module(path: str) -> str:
+    parts = list(Path(path).with_suffix("").parts)
+    if parts[0] == "tools" or parts[:2] == ["paper", "forge_paper"]:
+        parts.pop(0)
+    if parts[-1] == "__init__":
+        parts.pop()
+    return ".".join(parts)
+
+
+def _supported_kind(path: str) -> str:
+    if path.startswith("tests/"):
+        return "reference"
+    if path.startswith(("experiments/archive/", "results/")) or (
+        path.startswith("paper/") and not path.startswith("paper/forge_paper/")
+    ):
+        return "historical"
+    return "active"
+
+
+def _supported_edges(
+    relative: str, text: str, modules: dict[str, str], candidates: set[str]
+) -> tuple[list[dict[str, Any]], list[str]]:
+    """Resolve static edges conservatively; report expressions that cannot be resolved."""
+    edges: list[dict[str, Any]] = []
+    issues: list[str] = []
+
+    def add(name: str, line: int, kind: str) -> None:
+        # Parent initializers can register stages and have other import-time effects.
+        parts = name.split(".")
+        for depth in range(1, len(parts) + 1):
+            target = modules.get(".".join(parts[:depth]))
+            if target is not None:
+                edges.append({"source": relative, "line": line, "target": target, "kind": kind})
+
+    if relative.endswith(".py"):
+        try:
+            tree = ast.parse(text, filename=relative)
+        except SyntaxError as error:
+            return [], [f"{relative}:parse:{error}"]
+        module = _supported_module(relative)
+        package = module if relative.endswith("/__init__.py") else module.rpartition(".")[0]
+        aliases = {
+            alias.asname or alias.name: alias.name
+            for statement in ast.walk(tree)
+            if isinstance(statement, ast.ImportFrom)
+            for alias in statement.names
+            if alias.name in {"import_module", "spec_from_file_location"}
+        }
+        for node in ast.walk(tree):
+            if isinstance(node, ast.Import):
+                for alias in node.names:
+                    add(alias.name, node.lineno, "import")
+            elif isinstance(node, ast.ImportFrom):
+                base = node.module or ""
+                if node.level:
+                    parts = package.split(".")
+                    if node.level > len(parts):
+                        issues.append(f"{relative}:{node.lineno}:relative-import")
+                        continue
+                    base = ".".join(parts[: len(parts) - node.level + 1] + ([base] if base else []))
+                add(base, node.lineno, "import")
+                for alias in node.names:
+                    add(f"{base}.{alias.name}", node.lineno, "import")
+                    if alias.name == "*":
+                        issues.append(f"{relative}:{node.lineno}:star-import")
+            elif isinstance(node, ast.Call):
+                func = node.func
+                name = (
+                    func.id
+                    if isinstance(func, ast.Name)
+                    else (func.attr if isinstance(func, ast.Attribute) else "")
+                )
+                name = aliases.get(name, name)
+                if name in {"__import__", "import_module", "spec_from_file_location"}:
+                    index = 1 if name == "spec_from_file_location" else 0
+                    arg = node.args[index] if len(node.args) > index else None
+                    if isinstance(arg, ast.Constant) and isinstance(arg.value, str):
+                        literal = arg.value
+                        if literal in candidates:
+                            edges.append(
+                                {
+                                    "source": relative,
+                                    "line": node.lineno,
+                                    "target": literal,
+                                    "kind": "dynamic-literal",
+                                }
+                            )
+                        elif not literal.startswith(".") and not literal.endswith(".py"):
+                            add(literal, node.lineno, "dynamic-literal")
+                        else:
+                            issues.append(f"{relative}:{node.lineno}:dynamic-relative-or-file")
+                    else:
+                        issues.append(f"{relative}:{node.lineno}:dynamic-expression")
+                elif isinstance(func, ast.Name) and name in {"getattr", "eval", "exec"}:
+                    if (
+                        name != "getattr"
+                        or len(node.args) < 2
+                        or not isinstance(node.args[1], ast.Constant)
+                    ):
+                        issues.append(f"{relative}:{node.lineno}:{name}")
+    # Include full literal paths and module names in commands, configs, manifests, and __all__.
+    for line, content in enumerate(text.splitlines(), 1):
+        for token in re.findall(r"[A-Za-z_][A-Za-z0-9_./-]*", content):
+            token = token.rstrip("./")
+            if token in candidates:
+                edges.append({"source": relative, "line": line, "target": token, "kind": "path"})
+            elif token in modules:
+                add(token, line, "module-reference")
+    return edges, sorted(set(issues))
+
+
+def survey_supported_studies(repo: Path, *, output: Path | None = None) -> dict[str, Any]:
+    """Inventory both studies, tools, references, and historical consumers without execution.
+
+    All maintained application files are roots, including direct commands absent from the catalog.
+    The report deliberately blocks unreached candidates if dynamic usage cannot be bounded.
+    Historical pins use the existing collector; its scan is an evidence supplement, not proof of
+    absence (missing/unparseable external artifacts cannot establish that code is unused).
+    """
+    repo = repo.resolve()
+    inputs = _supported_inputs(repo)
+    candidates = {
+        path.relative_to(repo).as_posix() for path in inputs if path.suffix in {".py", ".sh"}
+    }
+    modules: dict[str, str] = {}
+    moves = load_moves(repo / "docs/artifact_path_moves.json")
+    issues: list[str] = []
+    for candidate in sorted(candidates):
+        if not candidate.endswith(".py"):
+            continue
+        name = _supported_module(candidate)
+        if name in modules:
+            issues.append(f"module-collision:{name}:{modules[name]}:{candidate}")
+        else:
+            modules[name] = candidate
+    graph: dict[str, set[str]] = defaultdict(set)
+    incoming: dict[str, list[dict[str, Any]]] = defaultdict(list)
+    roots: dict[str, set[str]] = {key: set() for key in ("active", "reference", "historical")}
+    hashes: dict[str, str] = {}
+    for path in inputs:
+        relative = path.relative_to(repo).as_posix()
+        hashes[relative] = str(sha256_file(path))
+        kind = _supported_kind(relative)
+        if relative in candidates and not relative.startswith("forge/"):
+            roots[kind].add(relative)
+        try:
+            text = path.read_text()
+        except (OSError, UnicodeError) as error:
+            issues.append(f"{relative}:read:{error}")
+            continue
+        if path.suffix == ".json":
+            try:
+                json.loads(text)
+            except ValueError as error:
+                issues.append(f"{relative}:parse-json:{error}")
+        edges, unresolved = _supported_edges(relative, text, modules, candidates | set(moves))
+        issues.extend(unresolved)
+        for edge in edges:
+            target = moves.get(edge["target"], edge["target"])
+            if target not in candidates:
+                continue
+            edge["original_target"] = edge["target"]
+            edge["target"] = target
+            graph[relative].add(target)
+            incoming[target].append(edge)
+            if relative not in candidates:
+                roots[kind].add(target)
+    pins = collect_pins(
+        tuple(
+            repo / name
+            for name in ("results", "docs/provenance", "configs", "experiments", "paper")
+        )
+    )
+    if output is not None:
+        output_name = (
+            str(output.resolve().relative_to(repo))
+            if output.resolve().is_relative_to(repo)
+            else str(output.resolve())
+        )
+        pins = [pin for pin in pins if pin.declared_by != output_name]
+    pin_rows: dict[str, list[dict[str, str]]] = defaultdict(list)
+    archive = HistoricalPinArchive.load(repo / "provenance/frozen-code/manifest.json", repo)
+    for pin in pins:
+        current = moves.get(pin.path, pin.path)
+        if current not in candidates:
+            continue
+        pin_rows[current].append(
+            {"path": pin.path, "sha256": pin.sha256, "declared_by": pin.declared_by}
+        )
+        roots["historical"].add(current)
+    reached = {kind: _closure(paths, graph) for kind, paths in roots.items()}
+    rows: list[dict[str, Any]] = []
+    for relative in sorted(candidates):
+        unresolved_pins = sorted(
+            {
+                pin["sha256"]
+                for pin in pin_rows[relative]
+                if hashes[relative] != pin["sha256"]
+                and archive.resolve(pin["path"], pin["sha256"]) is None
+            }
+        )
+        roles = [kind for kind in roots if relative in reached[kind]]
+        classification = next((f"keep_{kind}" for kind in roles), "review_unreached")
+        if unresolved_pins or (not roles and issues):
+            classification = "blocked"
+        rows.append(
+            {
+                "path": relative,
+                "sha256": hashes[relative],
+                "classification": classification,
+                "roles": roles,
+                "incoming_references": incoming[relative],
+                "historical_pins": pin_rows[relative],
+                "unresolved_pin_identities": unresolved_pins,
+                "requires_manual_symbol_review": True,
+            }
+        )
+    # Hash the pin declarations as well as all inspected source/document bytes. No count-only gate.
+    from forge.core.hashing import sha256_json
+
+    pin_digest = str(sha256_json(sorted((pin.path, pin.sha256, pin.declared_by) for pin in pins)))
+    archive_path = repo / "provenance/frozen-code/manifest.json"
+    if archive_path.is_file():
+        hashes["provenance/frozen-code/manifest.json"] = str(sha256_file(archive_path))
+    document = {
+        "schema_version": "forge.supported_studies_code_survey.v1",
+        "scope": "supported-studies",
+        "safe_for_automated_deletion": False,
+        "root_policy": "all maintained applications, tools, study documents, tests, and historical consumers",
+        "inputs": hashes,
+        "pin_declarations_sha256": pin_digest,
+        "fingerprint": str(sha256_json({"files": hashes, "pins": pin_digest})),
+        "unresolved_references": sorted(set(issues)),
+        "classifications": rows,
+        "counts": dict(sorted(Counter(row["classification"] for row in rows).items())),
+        "limitations": [
+            "Module reachability does not prove symbol use or authorize retirement.",
+            "Dynamic expressions and external consumers require manual review.",
+            "The historical pin collector tolerates absent or unreadable artifacts; this is not absence proof.",
+            "Every direct application is retained unless separately adjudicated as obsolete.",
+            "Installed environments (.venv, venv, site-packages), Git metadata, caches, and symlinks are excluded from source candidates.",
+        ],
+    }
+    if output is not None:
+        write_json(output, document)
+    return document

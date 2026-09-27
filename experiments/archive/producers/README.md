@@ -36,10 +36,10 @@ historical path/hash identity is not yet safely retired. Publication generators 
 - figure, table, and manuscript builders are publication tooling and remain separate from model
   execution.
 
-The machine-readable classification is `provenance/code-retirement/iclr2027.json`. It distinguishes
-paper/CLI reachability, archived pin identities, and retirement candidates. A candidate is not deleted
-in bulk merely because static reachability says it can be; unique acquisition, adjudication, or
-negative-result logic still receives human review.
+The saved `provenance/code-retirement/iclr2027.json` classification covers one historical contract.
+Use `make code-survey-supported` for the combined study inventory and consult
+`docs/LEGACY_CODE_RETIREMENT.md`. Neither survey authorizes automatic deletion; unique acquisition,
+adjudication, independent reference, and negative-result logic require explicit review.
 
 Do not add new direct workflow scripts. Add typed domain functions, register an experiment stage,
 and expose the workflow through `forge`. A legacy script can be removed only after all of the

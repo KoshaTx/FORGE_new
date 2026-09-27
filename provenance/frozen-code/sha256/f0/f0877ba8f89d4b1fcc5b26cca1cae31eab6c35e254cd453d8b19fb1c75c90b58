@@ -13,7 +13,7 @@ import json
 from pathlib import Path
 from typing import Any
 
-from forge_maintenance.code_survey import survey_code, survey_supported_studies
+from forge_maintenance.code_survey import survey_code
 from forge_maintenance.test_baseline import build_test_baseline_report
 
 DEFAULT_BENCHMARK_SEEDS = (20260825, 20260826, 20260827)
@@ -47,10 +47,6 @@ def _optional(repo: Path, value: str | None) -> Path | None:
 
 def _command_survey(args: argparse.Namespace) -> int:
     repo = _repo()
-    if args.scope == "supported-studies":
-        result = survey_supported_studies(repo, output=_optional(repo, args.output))
-        _print(result)
-        return 2 if result["unresolved_references"] else 0
     contract = _under(repo, args.contract) if args.contract else repo / DEFAULT_CONTRACT
     if not contract.is_file():
         raise FileNotFoundError(f"paper reproduction contract not found: {contract}")
@@ -124,9 +120,7 @@ def build_parser() -> argparse.ArgumentParser:
     commands = parser.add_subparsers(dest="command", required=True)
 
     survey = commands.add_parser("survey", help="classify code against the paper and CLI roots")
-    scope = survey.add_mutually_exclusive_group()
-    scope.add_argument("--contract")
-    scope.add_argument("--scope", choices=["supported-studies"])
+    survey.add_argument("--contract")
     survey.add_argument("--output")
     survey.set_defaults(function=_command_survey)
 
