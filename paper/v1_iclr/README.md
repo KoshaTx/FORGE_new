@@ -1,5 +1,10 @@
 # FORGE, ICLR 2027
 
+> **Revision notice:** the newer author-supplied PDF for reviewer cleanup is
+> [`../submission/FORGE.pdf`](../submission/FORGE.pdf). This directory's canonical source and exports
+> describe an earlier related revision. The historical build/validation notes below refer to that
+> revision, not the newly supplied PDF. See the [reviewer guide](../submission/README.md).
+
 `FORGE_ICLR2027_paper.tex` is the canonical manuscript for this directory. It uses the official
 ICLR 2027 conference style in anonymous review mode, including the conference bibliography style.
 Historical computational measurements are preserved. Mathematical claims have been corrected and

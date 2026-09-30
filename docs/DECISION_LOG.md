@@ -24124,3 +24124,34 @@ Exact removals, replacements, test receipts, source identities, replay commands,
 are recorded under `results/maintenance/legacy_cleanup_v1/`. Historical artifacts, scientific
 thresholds, frozen inputs, and unrelated manuscript work were preserved. No training, remote job,
 commit, or push was launched.
+
+
+## 2026-09-30 — Align the reviewer entry point to the supplied FORGE submission
+
+The user requested a review branch in FORGE_new matching `FORGE__ICLR_ (2).pdf`.
+The unmodified 39-page PDF is now the authoritative reviewer reference under
+`paper/submission/`, with SHA-256 identity, a complete table/figure navigation map,
+current-code pointers and explicit artifact-access limits. Root/package descriptions
+now use the paper's reaction-guided three-family framing. Historical research plans,
+22-family work, old manuscript sources and frozen numerical inputs remain identifiable
+and retain their existing paths and bytes.
+
+The supplied PDF differs from the existing v1_iclr source. Its exact LaTeX export has
+not been supplied; old builds are no longer presented as builds of this submission.
+The author record's intravenous administration entry conflicts with intramuscular
+wording in the PDF and remains an explicit author question. Neither the manuscript
+nor the experimental evidence was rewritten to resolve the conflict by assumption.
+
+Added an offline standard-library integrity check, `make review-check`, and a CI job.
+It verifies 121 pinned review assets and recomputes the three conditioned means/sample
+SDs from the nine published seed-count rows. Its bounded direct-input inventory checks
+72 historical pins: six match in the checkout and 66 are absent. Missing run artifacts
+are disclosed; changed present artifacts fail. Strict availability mode fails on missing
+inputs. Neither mode claims model or experimental reproduction. The legacy v0 paper
+commands are explicitly distinguished from this submission.
+
+Thirteen focused verifier tests pass, including corrupt/missing evidence, wrong weights,
+incorrect denominators, duplicate seeds, sample-SD drift and path escape. Changed Python
+files pass lint and formatting checks. No model inference, training, cloud compute,
+scientific threshold changes or new experimental results were introduced. Work remains
+on `review/paper-alignment` for teammate review, without merging to the default branch.

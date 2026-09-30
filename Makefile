@@ -1,3 +1,4 @@
+.DEFAULT_GOAL := help
 .PHONY: help vendor vendor-partial verify verify-partial verify-pins verify-pins-code \
 	archive-pins doctor experiment-list experiment-smoke phase1-corpus-run \
 	phase1-multireaction-corpus \
@@ -42,8 +43,13 @@ PREPARATION_TESTS := $(sort $(wildcard tests/test_compose_lipid*.py) \
 PREPARATION_PYTEST_ARGS ?=
 TEST_PYTEST_ARGS ?=
 
+.PHONY: review-check
+review-check:
+	python3 tools/review_submission.py
+
 help:
-	@echo "FORGE — authorized M0 and bounded Phase 1 work. Read AGENTS.md first."
+	@echo "FORGE — reaction-guided lipid generation. See paper/submission for the paper."
+	@echo "  make review-check               offline submitted-paper integrity/arithmetic check"
 	@echo ""
 	@echo "Data and provenance"
 	@echo "  make vendor / verify             materialize and verify hash-pinned inputs"

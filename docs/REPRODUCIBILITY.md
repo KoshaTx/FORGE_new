@@ -1,5 +1,9 @@
 # Reproducible experiments
 
+For the submitted paper's available assets, missing checkpoints and offline check, see
+[`paper/submission/ARTIFACTS.md`](../paper/submission/ARTIFACTS.md). This page documents development
+workflows; its commands and current environment are not a recovered historical training manifest.
+
 ## Install
 
 ```bash

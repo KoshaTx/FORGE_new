@@ -4,7 +4,14 @@ FORGE keeps scientific decisions and negative results because they are part of t
 The flat filenames are retained for now: many are linked by frozen results, decision records, and
 automation. This index provides the hierarchy without creating path churn during the code refactor.
 
-## Read first
+## Reviewing the submitted paper
+
+Start with the [submitted PDF and reviewer guide](../paper/submission/README.md),
+[paper-to-code map](../paper/submission/EVIDENCE.md) and
+[data/checkpoint availability](../paper/submission/ARTIFACTS.md).
+The research plans below preserve earlier decisions; they are not a substitute for this submission.
+
+## Contributor and historical context
 
 1. `../AGENTS.md` — authorized scope and non-negotiable scientific constraints.
 2. `PLAN.md` — scientific plan; sections 1–5 and 13 are required context.
@@ -18,7 +25,7 @@ automation. This index provides the hierarchy without creating path churn during
 
 - `ARCHITECTURE.md` — package boundaries and allowed dependency direction.
 - `REPRODUCIBILITY.md` — local and Modal experiment execution.
-- `../configs/reproduction/iclr2027.json` — exact authoritative paper/evidence contract.
+- `../configs/reproduction/iclr2027.json` — archived **v0** paper/evidence contract; not the current submission.
 - `REFACTOR_BASELINE.md` — inherited test and artifact baseline.
 - `DATA_PROVENANCE.md` — data, repository migration, and artifact provenance.
 - `provenance_check_audit.md` — strictness differences in legacy pin validators.

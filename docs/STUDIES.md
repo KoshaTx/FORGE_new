@@ -1,5 +1,10 @@
 # Supported computational studies
 
+For the reviewer-facing three-family submission, start with
+[`paper/submission/README.md`](../paper/submission/README.md). The exact supplied PDF is newer than
+the `v1_iclr` source below. The 22-family extension is a separate study, not part of that paper's
+reported three-family comparisons.
+
 Both study generations remain supported. They share scientific implementations; the family
 count is a study definition, not a rule for deciding whether a source file is obsolete.
 `AGENTS.md` controls the current computational scope and execution authorization.

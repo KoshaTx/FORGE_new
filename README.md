@@ -1,118 +1,93 @@
 # FORGE
 
-**Route-Grounded Generative Design of Synthetically Executable Ionizable Lipids**
+**Reaction-Guided Generative Design of Ionizable Lipids**
 
-Computational engine for a Nature Biotechnology paper on synthesis-grounded whole-lipid generation.
-FORGE couples a bounded whole-molecule generator to recursive synthesis-program construction and
-records auditable L1/L2/L3 evidence without treating computational route support as synthesis success.
+[Paper](paper/submission/FORGE.pdf) · [Reviewer guide](paper/submission/README.md) ·
+[Paper → code and results](paper/submission/EVIDENCE.md) ·
+[Data and checkpoints](paper/submission/ARTIFACTS.md)
 
-The unit of generation is a **product–route dossier**, not a SMILES string.
+FORGE (**Flow-matched, Open-ended, Route-resolved Generation and Exploration**) generates
+complete molecular graphs conditioned on an assembly reaction program. The program supplies
+precursor roles, reaction-core positions, transformation order and coarse molecular architecture;
+it does not supply component identifiers, stored precursor graphs or fragment tokens.
+Generated molecules are decomposed into implied precursors and checked by exact forward replay.
+Bounded upstream route assessment returns a computational dossier or an explicit unresolved outcome.
 
-> **Working in this repo? Read [`AGENTS.md`](AGENTS.md) first.** It defines the authorized scope and
-> nine hard constraints that an agent optimizing for green tests will otherwise violate.
+This branch documents the supplied **39-page manuscript**, pinned in
+[`paper/submission/manifest.json`](paper/submission/manifest.json). Its experiments use the
+historical **shared three-family model**: Ugi 3-CR, repeated aza-Michael addition and repeated
+reductive amination. The separate 22-family study is indexed under [other studies](docs/STUDIES.md).
 
-## Status
+## Results in the paper
 
-M0 is complete. Bounded Phase 1 product/L1 training, synthesis-routing readiness, and the single
-versioned HeLa diagnostic described in `AGENTS.md` are authorized. Later phases and unrestricted
-biological optimization are not. A bounded computational multi-reaction extension is also
-authorized; Ugi remains the deep case and no new biological or wet-lab scope is implied.
+Verified exact-L1 yield (% of **all 3,072 attempts per program and seed**), mean ± sample standard
+deviation across three independent training seeds (Table 1):
 
-- Plan: [`docs/PLAN.md`](docs/PLAN.md)
-- Documentation map: [`docs/README.md`](docs/README.md)
-- Supported studies: [`docs/STUDIES.md`](docs/STUDIES.md) — three-family and 22-family workflows.
-- Tasks: [`docs/M0_TASKS.md`](docs/M0_TASKS.md)
-- Data: [`docs/DATA_PROVENANCE.md`](docs/DATA_PROVENANCE.md)
-- Decisions: [`docs/DECISION_LOG.md`](docs/DECISION_LOG.md)
-- Multi-reaction extension: [`docs/MULTIREACTION_COMPUTATIONAL_PLAN.md`](docs/MULTIREACTION_COMPUTATIONAL_PLAN.md)
+| Reaction program | FORGE conditioned | Shared null + post-hoc verification | Cyclic program |
+|---|---:|---:|---:|
+| Ugi 3-CR | 96.4 ± 2.1 | 34.8 ± 7.1 | 93.8 ± 4.2 |
+| Repeated aza-Michael | 72.2 ± 1.6 | 19.2 ± 4.1 | 71.5 ± 2.2 |
+| Repeated reductive amination | 52.3 ± 3.4 | 37.0 ± 2.2 | 50.7 ± 4.9 |
 
-## Quick start
+In the common Ugi benchmark (Table 2), FORGE yielded **963.9 ± 21.4** exact-L1 products and
+**862.6 ± 19.2** distinct component-novel products per 1,000 attempts. Component novelty is
+relative to the verifier and the method-visible training catalogue; it does not prove strong
+product-level catalogue escape. The paper retains negative and reaction-dependent ablation results.
+
+The paper also reports four 4-hour FLuc imaging values for three synthesized FORGE lipid
+formulations and MC3. FORGE-3's reported signal is **13.1×** the MC3 value. These are individual
+reported values, without replicate-level uncertainty or significance tests; see the
+[experimental record and remaining questions](paper/submission/EVIDENCE.md#experimental-record).
+Exact assembly replay alone does not demonstrate synthesis success or delivery performance.
+
+## Start here: no GPU or model downloads
+
+From the repository root with Python 3.10+:
 
 ```bash
-uv venv && source .venv/bin/activate
-uv sync --frozen --extra dev --extra torch
-make vendor    # or: make vendor-partial   (skips the 96 MB R1 asset)
-make verify
-make check-core
-forge doctor
-forge experiment run installation-smoke --profile smoke
-
-# Qualified model workflows
-forge doctor phase1-training-smoke
-forge experiment run phase1-training-smoke --profile smoke
-forge experiment run phase1-sampling --profile smoke
-forge experiment reproduce phase1-sampling --profile smoke
-forge experiment run phase1-multireaction-corpus --profile full
-forge experiment run phase1-multireaction-training-smoke --profile smoke
-forge experiment run phase1-multireaction-overfit --profile smoke
-forge experiment reproduce phase1-multireaction-overfit --profile smoke
-forge experiment run phase1-shared-synthesis-program-representation --profile full
-forge experiment reproduce phase1-shared-synthesis-program-representation --profile full
-forge experiment run phase1-shared-synthesis-program-integration --profile smoke
-forge experiment reproduce phase1-shared-synthesis-program-integration --profile smoke
-forge experiment run phase1-shared-synthesis-program-production-design --profile full
-forge experiment reproduce phase1-shared-synthesis-program-production-design --profile full
-forge experiment run phase1-finite-component-catalogue-baseline --profile smoke
-# After the final source snapshot is frozen, run the matched three-seed CPU baseline:
-make phase1-finite-component-catalogue-full
-
-# Paper and provenance
-forge paper verify
-forge paper reproduce          # exact artifact replay + two clean packaging builds
-forge paper doctor --strict   # reports every blocker to a full numerical rerun
-forge paper experiments       # audits every v1 experiment/baseline manuscript row
-forge paper build
-forge provenance verify --expect-verified 822
-make code-survey
-make test-baseline-report       # summarize the last clean-cache full-suite run
+make review-check
 ```
 
-`make vendor` copies hash-pinned assets from absolute paths on the originating workstation. If those
-paths do not resolve it fails with the missing list and expected hashes. **Do not substitute data.**
+This offline check verifies the submitted PDF and indexed evidence files, recomputes the
+conditioned Table 1 means/SDs from Table 4's seed counts, and lists unavailable historical inputs.
+It **does not rerun training or inference**. The JSON report includes expected paths and hashes:
 
-Active experiment specifications live beside their applications under `experiments/`. See
-[`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) for package boundaries and
-[`docs/REPRODUCIBILITY.md`](docs/REPRODUCIBILITY.md) for local and Modal execution.
-The production training DAG is planned or launched explicitly with
-`forge experiment ... phase1-training-production --profile full`; it is never triggered by the
-smoke workflow.
+```bash
+python3 tools/review_submission.py --json > /tmp/forge-review-report.json
+```
 
-The archived ICLR v0 source is `paper/v0/FORGE_ICLR2027_paper.tex`. Its exact source, twelve
-manuscript evidence roots, generated tables, and included figures are frozen in
-`configs/reproduction/iclr2027.json`. `forge paper verify` checks artifact replay. The stricter
-doctor additionally walks the recursive path/hash graph and reports unavailable upstream corpus,
-checkpoint, and external-engine bytes; it never calls artifact replay a full training reproduction.
+**Full numerical reproduction is not available from this checkout alone.** The historical
+production checkpoint archives and some evaluation ledgers are absent. The paper also records
+missing historical source/environment information. [Artifact access and exact limitations](paper/submission/ARTIFACTS.md)
+are separate from the checks that run locally. Small smoke checkpoints elsewhere in the tree are
+not the paper's production model.
 
-## The three synthesis layers
+## Code and development
 
-The organizing insight. "Synthesizable" is not one property:
+```bash
+uv sync --frozen --extra dev --extra torch
+uv run forge --help
+uv run make test-one TEST=tests/test_review_submission.py
+```
 
-| | L1 — Final assembly | L2 — Subcomponent synthesis | L3 — Procurement |
-|---|---|---|---|
-| What | Ugi-3CR joining amine + aldehyde + isocyanide | Making heads, tails, linkers, **esters**, isocyanides | Buying terminal leaves |
-| Status | **Mechanically qualified for 1,200 nominal rows; 1,100 exact single-compound records after source reconciliation** | **The open problem** | **Dynamic**, expires |
-| Uncertainty | ≈ constant across candidates | **Dominates candidate variance** | Vendor-driven |
+Installing dependencies requires network access. Training, sampling and data preparation have
+additional hash-pinned inputs; follow the [artifact guide](paper/submission/ARTIFACTS.md) before
+running them. `make vendor` refers to paths on the original workstation and is not a public data
+download command. The current lockfile is a development environment, not a recovered historical
+training environment.
 
-Preserving a Ugi core is insufficient: if the final coupling works but an ester-bearing tail precursor
-cannot be made, the lipid is not executable. The ester comes from the *aldehyde* component — so ester
-construction is L2, not L1.
-
-## Open-endedness tiers
-
-| Tier | Meaning |
+| Directory | Purpose |
 |---|---|
-| E0 | Exact product in the frozen enumeration |
-| E1 | Known assembly, all components already accepted terminal blocks |
-| **E2** | **Known assembly, ≥1 component needs a generated L2 route — the primary claim** |
-| E3 | New assembly family — exploratory, the paper does not depend on it |
+| [`forge/model/`](forge/model) and [`forge/flow/`](forge/flow) | Graph representation, conditioned Transformer, training and discrete-flow sampling |
+| [`forge/assembly/`](forge/assembly) | Reaction adapters, decomposition and exact replay |
+| [`forge/synthesis/`](forge/synthesis) | Bounded precursor route assessment and evidence |
+| [`experiments/`](experiments) and [`configs/`](configs) | Versioned study workflows and contracts |
+| [`paper/submission/`](paper/submission) | Submitted PDF, reviewer guide and evidence manifest |
+| [`paper/v1_iclr/`](paper/v1_iclr) | Related earlier manuscript sources and supporting tables/figures |
+| [`tests/`](tests) | Scientific and software contract checks; some require external artifacts |
+| [`docs/`](docs), [`results/`](results), [`provenance/`](provenance) | Research history, retained results and immutable source records |
 
-## Relationship to other projects
-
-FORGE **consumes** the `compose_rgm` corpus and reaction registry as hash-pinned vendored data. It does
-not fork or modify them. That boundary is deliberate: FORGE's protagonist is complete route execution,
-while COMPOSE-Lipid's is the generative distribution and biological targeting. FORGE does not reuse
-pulmonary delivery as its endpoint.
-
-LUCID (ICLR 2026 GEM workshop) is the historical baseline: it sampled one of 527 stored topologies and
-diffused only atom/bond identities, and its synthesizability check was a hardcoded component lookup.
-FORGE generates topology and produces auditable routes.
+Contributors: read [AGENTS.md](AGENTS.md), the [architecture](docs/ARCHITECTURE.md) and the
+[study map](docs/STUDIES.md). Historical paths remain stable because evidence records refer to
+their exact bytes. The legacy `forge paper verify/reproduce/build` commands target the archived
+**v0** paper; they do not validate or rebuild the submitted PDF linked above.
