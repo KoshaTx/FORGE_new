@@ -24241,3 +24241,22 @@ requiring unavailable inputs, and passed both adapter identity tests. The first 
 (42 assembly/core/CLI, 77 model/runtime, and 20 paper files) passed. The last tooling scope found one
 obsolete `type: ignore[method-assign]` on an already dynamically typed profiling wrapper; removed
 that comment without changing runtime behavior. The final push still requires a green CI result.
+
+## 2026-09-30 — Qualify cleanup CI and scope checkpoint recovery
+
+All four jobs in GitHub run `36805576041` passed for commit `20449480`: submission review, study
+compatibility, evidence regression and core checks. Core tests reported 191 passed and 11 explicit
+missing-input skips; all 153 files across the four typing scopes passed. These results qualify the
+current engineering checks, not paper-model inference or historical numerical reproduction.
+
+Read-only Modal inventories of the two configured workspaces did not locate the documented
+`forge-experiment-runs` volume. Inventoried all 12 accessible FORGE-prefixed volumes in the active
+workspace (696 entries); no paper checkpoint paths, archive filenames or step-9143 filenames were
+found. The local Git clone had no history for the three documented production directories. Older
+Ugi/pretraining checkpoints were not substituted. Recovery now requires the original workspace or
+an accessible export; this is not evidence that the originals have been deleted.
+
+Added a reviewer-release checklist identifying checkpoint companions, direct evaluator inputs,
+bounded-generation qualification and distribution gaps. Clarified that remaining laboratory details
+do not block a computational code release. No weights were loaded, scientific inputs changed or
+paid compute launched during this search.

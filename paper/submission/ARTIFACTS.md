@@ -58,8 +58,11 @@ These limits are disclosed in Appendix A.8; current code is not a replacement hi
 
 The versioned input contracts are linked in [EVIDENCE.md](EVIDENCE.md). Many full evaluations live
 under ignored `runs/` paths; a committed contract identifying them is not the same as distributing
-their contents. `make vendor` copies hash-pinned assets from the originating workstation, not from
-a public data service. See [data provenance](../../docs/DATA_PROVENANCE.md) for origins and boundaries.
+their contents. Full `make vendor` requires hash-pinned assets from the originating workstation,
+in addition to available public inputs. The selected public LNPDB test input can be fetched with
+`PYTHONPATH=.:tools python -m forge_data.fetch lnpdb_fc7c389.csv`; that dataset alone does not supply
+the paper's training cache or checkpoints. See [data provenance](../../docs/DATA_PROVENANCE.md)
+for origins and boundaries, and [RELEASE.md](RELEASE.md) for the generation-release checklist.
 
 After the maintainers provide the exact required inputs, install the locked development environment:
 

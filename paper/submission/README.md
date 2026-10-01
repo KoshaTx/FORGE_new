@@ -42,10 +42,13 @@ older source provenance is not rewritten to claim a newer source identity.
 
 ## Maintainer review before external release
 
+See [RELEASE.md](RELEASE.md) for the model-bundle recovery and runnable-generation checklist.
+
 - Supply the exact submitted LaTeX export if editable manuscript reproduction is required.
 - Publish/access-enable the specific checkpoint archives and evaluation inputs listed in
   [ARTIFACTS.md](ARTIFACTS.md), with their recorded hashes and applicable data permissions.
-- Supply the remaining experimental details listed in [EVIDENCE.md](EVIDENCE.md#experimental-record).
+- For experimental reproducibility, supply the remaining details listed in
+  [EVIDENCE.md](EVIDENCE.md#experimental-record); these do not block a computational code release.
   The administration route is intramuscular, clarified by the user to match the submitted paper.
 - Choose the appropriate reviewer distribution. This is the existing organization repository with
   retained Git history; the PDF's anonymous author block does not make this repository anonymous.
