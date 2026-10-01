@@ -24226,12 +24226,3 @@ environment. All 122 reviewer assets verify, while only 6 of 72 declared histori
 available. The baseline evidence comparison reports no new losses and historical availability
 INCOMPLETE. Archived exact pre-edit source/test versions before committing the fixes. These are
 engineering checks, not a full scientific reproduction or a production-readiness claim.
-
-The next locked Linux run (`36803566764`, commit `29e5fe79`) passed submission review, evidence
-regression, study compatibility, reviewer/dispatch tests and lint. Core tests reported 191 passed,
-10 skipped and one failure: the mixed-repeat design requires an absent historical Transformer
-qualification receipt. That test now declares the missing input under the same strict/skip contract.
-Assembly typing passed; the next type scope found four errors in Transformer adapter initialization.
-Added concrete `Linear`/`Sequential` casts and bias checks while retaining the same construction
-order, parameter names and zero initialization. CI now also runs the existing specialist and role-local
-decoder identity tests for this change. The final Linux rerun remains required.

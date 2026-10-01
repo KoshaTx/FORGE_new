@@ -63,12 +63,6 @@ jobs:
         run: uv sync --frozen --extra dev --extra torch
       - name: Check reviewer verifier failure modes
         run: uv run --frozen pytest -q tests/test_review_submission.py tests/test_ci_frozen.py tests/test_ci_provenance.py tests/test_public_data_fetch.py tests/test_external_artifact_requirements.py tests/test_potency_stage_contract.py
-      - name: Check zero-initialized adapter identity
-        if: ${{ !cancelled() && steps.install.outcome == 'success' }}
-        run: >-
-          uv run --frozen pytest -q
-          tests/test_reaction_specialization.py::test_specialist_is_an_exact_zero_delta_before_fine_tuning
-          tests/test_reaction_specialization.py::test_role_local_tree_decoder_is_identity_then_changes_only_target_program
       - name: Check types
         if: ${{ !cancelled() && steps.install.outcome == 'success' }}
         run: uv run --frozen make typecheck

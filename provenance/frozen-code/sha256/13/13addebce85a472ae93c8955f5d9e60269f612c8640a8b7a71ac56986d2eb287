@@ -160,9 +160,6 @@ def test_design_accepts_only_the_qualified_transformer_balancing_contract() -> N
         validate_production_design_contract(config)
 
 
-@pytest.mark.requires_artifacts(
-    "results/phase1/reaction_program_transformer_overfit_v1/result.json",
-)
 def test_mixed_repeat_design_changes_only_authenticated_data_contract() -> None:
     # The derived design is itself an authenticated input and therefore must live below the repo.
     (REPO / "runs").mkdir(exist_ok=True)
