@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from collections import Counter
 from collections.abc import Mapping
+from typing import Any
 
 from rdkit import Chem, rdBase
 
@@ -15,7 +16,7 @@ from forge.assembly.families import (
 from forge.assembly.repeated_components import element_inventory
 
 
-def _properties(atom: Chem.Atom) -> dict:
+def _properties(atom: Chem.Atom) -> dict[str, Any]:
     return {
         "atomic_number": atom.GetAtomicNum(),
         "formal_charge": atom.GetFormalCharge(),
@@ -28,10 +29,10 @@ def check_source_event(
     components: Mapping[str, str],
     target: str,
     *,
-    site_contract: list[dict],
+    site_contract: list[dict[str, Any]],
     role_queries: Mapping[str, Chem.Mol],
     maximum_outcomes: int = 256,
-) -> dict:
+) -> dict[str, Any]:
     """Require a unique frozen-transform replay and a source-permitted attachment witness.
 
     Additional source predicates can only restrict the original registry. They do not remove
@@ -113,7 +114,7 @@ def check_source_event(
                 witness.append((role, item["atom_map"], atom_index))
             else:
                 witnesses.add(tuple(witness))
-    left = Counter()
+    left: Counter[str] = Counter()
     for smiles in canonical.values():
         # Counter addition drops nonpositive totals, which would corrupt charge accounting.
         for key, count in element_inventory(smiles).items():

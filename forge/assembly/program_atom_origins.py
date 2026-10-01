@@ -7,7 +7,7 @@ No target product, inverse decomposition, or selected reaction lineage enters th
 
 from __future__ import annotations
 
-from collections.abc import Mapping, Sequence
+from collections.abc import Collection, Mapping, Sequence
 from dataclasses import dataclass
 
 from rdkit import Chem, rdBase
@@ -56,7 +56,7 @@ def canonical_coordinates(
         includeIsotopes=False,
         includeAtomMaps=False,
     )
-    labels = {}
+    labels: dict[int, tuple[str, str]] = {}
     for rank, coordinate in zip(ranks, coordinates, strict=True):
         if rank in labels and labels[rank] != coordinate:
             return None
@@ -142,13 +142,19 @@ def trace_repeated_program(
     current = {Chem.MolToSmiles(initial, isomericSmiles=True): initial}
     layers, transitions = [1], 0
 
-    def result(disposition, *, complete=False, annotations=None, products=()):
+    def result(
+        disposition: str,
+        *,
+        complete: bool = False,
+        annotations: ProgramAtomOrigins | None = None,
+        products: Collection[str] = (),
+    ) -> SemanticReplay:
         return SemanticReplay(
             disposition, complete, annotations, tuple(products), tuple(layers), transitions
         )
 
     for _ in range(events):
-        following = {}
+        following: dict[str, Chem.Mol] = {}
         for _, state in sorted(current.items()):
             reactants = tuple(
                 state if role == accumulator_role else molecules[role] for role in adapter.roles
@@ -206,14 +212,14 @@ def trace_repeated_program(
             symmetry_ambiguous = True
         else:
             annotations.add(assignment)
-    products = tuple(sorted(products))
-    if len(products) != 1:
-        return result("ambiguous_forward_products", complete=True, products=products)
+    ordered_products = tuple(sorted(products))
+    if len(ordered_products) != 1:
+        return result("ambiguous_forward_products", complete=True, products=ordered_products)
     if symmetry_ambiguous or len(annotations) != 1:
-        return result("ambiguous_atom_coordinates", complete=True, products=products)
+        return result("ambiguous_atom_coordinates", complete=True, products=ordered_products)
     return result(
         "unique_forward_atom_coordinates",
         complete=True,
-        products=products,
+        products=ordered_products,
         annotations=next(iter(annotations)),
     )

@@ -6,6 +6,8 @@ retained; a later forward replay must independently establish product uniqueness
 
 from __future__ import annotations
 
+from typing import Any
+
 from forge.assembly.families import (
     LibraryAssemblyError,
     RegistryAssemblyAdapter,
@@ -21,7 +23,7 @@ def infer_repeated_components(
     accumulator_role: str,
     events: int,
     bounds: RepeatBounds = RepeatBounds(),
-) -> dict:
+) -> dict[str, Any]:
     """Return all complete tuples, or no admissible result when the search is truncated.
 
     Counts and search bounds describe computation only. Neither a deterministic path
@@ -34,7 +36,7 @@ def infer_repeated_components(
     target = constitutional_molecule(product)[0]
     side_roles = tuple(role for role in adapter.roles if role != accumulator_role)
     # A state binds a residual accumulator to the same complete side reagents at every event.
-    states = {(target, ())}
+    states: set[tuple[str, tuple[tuple[str, str], ...]]] = {(target, ())}
     state_counts = [1]
     transition_count = 0
     reasons = []

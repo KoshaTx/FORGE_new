@@ -20,6 +20,31 @@ from unreproducible_pins import (  # noqa: E402
 )
 
 
+def pytest_addoption(parser: pytest.Parser) -> None:
+    parser.addoption(
+        "--require-external-artifacts",
+        action="store_true",
+        help="Fail instead of skipping tests whose declared historical inputs are unavailable.",
+    )
+
+
+def pytest_runtest_setup(item: pytest.Item) -> None:
+    repo = Path(__file__).resolve().parents[1]
+    missing = sorted(
+        {
+            str(relative)
+            for marker in item.iter_markers("requires_artifacts")
+            for relative in marker.args
+            if not (repo / relative).is_file()
+        }
+    )
+    if missing:
+        message = "External historical artifacts unavailable: " + ", ".join(missing)
+        if item.config.getoption("--require-external-artifacts"):
+            pytest.fail(message)
+        pytest.skip(message)
+
+
 def pytest_collection_modifyitems(items: list[pytest.Item]) -> None:
     """Mark tests with unrecoverable pinned inputs as expected failures.
 

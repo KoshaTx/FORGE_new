@@ -11,6 +11,7 @@ audited and a pin that merely records a number nobody can check.
 
 from __future__ import annotations
 
+import gzip
 import json
 import subprocess
 from collections.abc import Iterator
@@ -173,6 +174,12 @@ def test_the_path_keyed_shape_is_actually_present_in_this_repository() -> None:
     keyed = [
         pin
         for pin in collect_pins((REPO / "results",))
-        if pin.path.endswith(".py") and "source_files" in (REPO / pin.declared_by).read_text()
+        if pin.path.endswith(".py")
+        and "source_files"
+        in (
+            gzip.decompress((REPO / pin.declared_by).read_bytes()).decode()
+            if pin.declared_by.endswith(".json.gz")
+            else (REPO / pin.declared_by).read_text()
+        )
     ]
     assert keyed, "no artifact declares a path-keyed source pin any more; retire the branch"

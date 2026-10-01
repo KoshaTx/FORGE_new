@@ -11,6 +11,7 @@ import json
 from collections import Counter
 from dataclasses import dataclass
 from pathlib import Path
+from typing import Any
 
 from rdkit import Chem
 
@@ -23,7 +24,7 @@ from forge.assembly.repeated_components import RepeatBounds, element_inventory
 from forge.core.hashing import sha256_file
 
 
-def _validate_constraints(specification: dict) -> None:
+def _validate_constraints(specification: dict[str, Any]) -> None:
     supported = {
         "allowed_atomic_numbers",
         "exact_element_counts",
@@ -73,7 +74,9 @@ def _validate_constraints(specification: dict) -> None:
         seen.add(q["name"])
 
 
-def _constraints(smiles: str, specification: dict, maximum_matches: int) -> dict:
+def _constraints(
+    smiles: str, specification: dict[str, Any], maximum_matches: int
+) -> dict[str, Any]:
     _, molecule = constitutional_molecule(smiles)
     checks = {}
     if "allowed_atomic_numbers" in specification:
@@ -103,7 +106,7 @@ def _constraints(smiles: str, specification: dict, maximum_matches: int) -> dict
 
 @dataclass(frozen=True)
 class RegistryStagedProgram:
-    specification: dict
+    specification: dict[str, Any]
     adapters: tuple[RegistryAssemblyAdapter, ...]
     bounds: RepeatBounds
 
@@ -217,9 +220,9 @@ class RegistryStagedProgram:
     def roles(self) -> tuple[str, ...]:
         return tuple(sorted(self.specification["terminal_constraints"]))
 
-    def infer(self, product: str) -> dict:
+    def infer(self, product: str) -> dict[str, Any]:
         target = constitutional_molecule(product)[0]
-        states = {(target, ())}
+        states: set[tuple[str, tuple[tuple[str, str], ...]]] = {(target, ())}
         layers, transitions, reasons = [1], 0, []
         for stage, adapter in reversed(
             tuple(zip(self.specification["stages"], self.adapters, strict=True))
@@ -275,7 +278,7 @@ class RegistryStagedProgram:
             "bound_reasons": reasons,
         }
 
-    def replay(self, components: dict[str, str], product: str) -> dict:
+    def replay(self, components: dict[str, str], product: str) -> dict[str, Any]:
         if set(components) != set(self.roles):
             raise LibraryAssemblyError("staged replay requires all terminal roles")
         canonical = {r: constitutional_molecule(s)[0] for r, s in components.items()}
@@ -356,8 +359,8 @@ class RegistryStagedProgram:
             "product_constraints": product_checks,
             "bound_reasons": reasons,
             "balance": {
-                "reactants": dict(sorted(left.items())),
-                "product_and_net_byproducts": dict(sorted(right.items())),
+                "reactants": dict[str, Any](sorted(left.items())),
+                "product_and_net_byproducts": dict[str, Any](sorted(right.items())),
             },
             "experimental_selectivity_qualified": False,
         }

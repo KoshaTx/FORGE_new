@@ -4,18 +4,18 @@ Read this file completely before doing anything. It is the contract for work in 
 
 ## What this project is
 
-FORGE is the computational engine for a Nature Biotechnology paper on **synthesis-grounded generative
-design of ionizable lipids**. The scientific claim is that a whole-molecule generator coupled to
-recursive synthesis-program construction produces complete lipid graphs with **auditable synthesis
-dossiers** to experimentally supported terminal materials. The current paper is **computational**.
-It does not include prospective synthesis, formulation, in-vitro experiments or in-vivo experiments.
-AGILE-type Ugi 3-CR chemistry is the deepest computational case. Matched comparison with post-hoc
-route filtering is a causal ablation of synthesis coupling, not the paper's identity.
+The reviewer-facing reference is now the supplied **FORGE: Reaction-Guided Generative Design of
+Ionizable Lipids** manuscript, preserved at [`paper/submission/FORGE.pdf`](paper/submission/FORGE.pdf).
+Read [`paper/submission/README.md`](paper/submission/README.md) and its evidence/artifact guides
+for the shared three-family study, author-reported in vivo measurements and reproducibility limits.
+The older `paper/v1_iclr` source is a related revision, not the exact source of the supplied PDF.
+The separate 22-family study remains documented in `docs/STUDIES.md`.
 
-Full scientific plan: [`docs/PLAN.md`](docs/PLAN.md). Read §1–§5 and §13 before writing code. The
-current Phase 1 execution order is frozen in
-[`docs/PHASE1_UGI_FIRST_PRODUCTION_PLAN.md`](docs/PHASE1_UGI_FIRST_PRODUCTION_PLAN.md).
-Prospective wet-lab sections in older plans are historical proposals and are not current paper scope.
+The historical scientific plan is [`docs/PLAN.md`](docs/PLAN.md). Read §1–§5 and §13 before
+changing scientific code, preserving the frozen chemistry, splits and evidence contracts.
+Its Nature Biotechnology/computational-only framing and the dated authorizations below are
+historical context, not descriptions of the newly supplied manuscript. Inclusion of author-reported
+experimental data does not authorize new wet-lab work, training or cloud jobs for a repository cleanup.
 
 ## Authorized scope — READ THIS
 

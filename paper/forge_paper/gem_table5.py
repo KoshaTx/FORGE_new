@@ -48,6 +48,8 @@ def _render_row(
     ):
         raise GemTable5Error(f"inadmissible Table 5 evaluation for {arm_id}")
     checkpoint_metrics = payload.get("checkpoint_metrics")
+    if not isinstance(checkpoint_metrics, Mapping):
+        raise GemTable5Error(f"Table 5 metrics are missing for {arm_id}")
     try:
         metrics = checkpoint_metrics[arm_id][str(checkpoint_step)][split][program_id]
     except (KeyError, TypeError) as error:
@@ -116,7 +118,10 @@ def render_gem_table5_decoder_source_ablation(
     for specification in rows:
         if not isinstance(specification, Mapping):
             raise GemTable5Error("GEM Table 5 row specification is malformed")
-        path = resolve_pin(specification.get("result"), repo, label="GEM Table 5 evaluation")
+        result_pin = specification.get("result")
+        if not isinstance(result_pin, Mapping):
+            raise GemTable5Error("GEM Table 5 row result pin is malformed")
+        path = resolve_pin(result_pin, repo, label="GEM Table 5 evaluation")
         payload = read_json_object(path, error=GemTable5Error, label="GEM Table 5 evaluation")
         row, values = _render_row(
             specification,

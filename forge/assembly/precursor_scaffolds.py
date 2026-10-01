@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
+from typing import Any
 
 from rdkit import Chem
 
@@ -10,8 +11,8 @@ from forge.assembly.families import LibraryAssemblyError, constitutional_molecul
 
 
 def assess_precursor_scaffold(
-    smiles: str, specification: Mapping, *, maximum_matches: int = 256
-) -> dict:
+    smiles: str, specification: Mapping[str, Any], *, maximum_matches: int = 256
+) -> dict[str, Any]:
     """Retain every scaffold witness; ambiguity or bounded search never qualifies.
 
     SMARTS, attachment bonds, allowed elements and coupling requirements come from the
@@ -61,7 +62,7 @@ def assess_precursor_scaffold(
                 addDummies=True,
                 dummyLabels=[(0, 0)] * len(bonds),
             )
-            original_atoms = []
+            original_atoms: list[tuple[int, ...]] = []
             fragments = Chem.GetMolFrags(
                 fragmented, asMols=True, sanitizeFrags=True, fragsMolAtomMapping=original_atoms
             )

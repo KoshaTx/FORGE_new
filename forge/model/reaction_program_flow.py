@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import math
 from collections import Counter
-from collections.abc import Mapping, Sequence
+from collections.abc import Callable, Mapping, Sequence
 from typing import Any
 
 import numpy as np
@@ -541,7 +541,7 @@ def synthesis_program_chemistry_loss(
 ) -> tuple[Any, dict[str, Any]]:
     """Return atom and bond-state loss without topology-pointer terms."""
 
-    cross_entropy = _masked_cross_entropy
+    cross_entropy: Callable[..., Any] = _masked_cross_entropy
     node_arguments: tuple[Any, ...] = ()
     parent_arguments: tuple[Any, ...] = ()
     closure_arguments: tuple[Any, ...] = ()

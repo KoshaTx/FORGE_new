@@ -57,6 +57,9 @@ def test_common_ugi_protocol_uses_one_attempt_denominator_and_three_seeds() -> N
     assert protocol["scope"]["training_folds"] == ["train"]
 
 
+@pytest.mark.requires_artifacts(
+    "runs/phase1-transformer-production-accelerator-benchmark-h100/9327c755b39b1217e0f838f33dc346a1b26e50b641cf446262f6059fb890b3e1/stages/benchmark/artifacts/result.json",
+)
 def test_diagnosis_reports_source_freeze_transition_without_claiming_results() -> None:
     diagnosis = diagnose_experiment_matrix(REPO, MATRIX)
     rows = {row["id"]: row for row in diagnosis["entries"]}
@@ -75,6 +78,22 @@ def test_diagnosis_reports_source_freeze_transition_without_claiming_results() -
         "completed" if source_matches else "launch_ready"
     )
     assert rows["held_reaction_family"]["requirement"] == "optional"
+
+
+def test_diagnosis_refuses_readiness_when_experiment_inputs_are_unavailable(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    import forge_paper.experiment_matrix as matrix_module
+
+    monkeypatch.setattr(matrix_module, "diagnose_experiment", lambda *_: {"ready": False})
+    monkeypatch.setattr(matrix_module, "_matching_runs", lambda *_, **__: {})
+    diagnosis = diagnose_experiment_matrix(REPO, MATRIX)
+    rows = {row["id"]: row for row in diagnosis["entries"]}
+    assert diagnosis["immediate_production_ready"] is False
+    assert diagnosis["setup_complete_for_all_retained_rows"] is False
+    assert diagnosis["paper_results_complete"] is False
+    assert rows["transformer_four_arm_production"]["observed_state"] == "blocked"
+    assert rows["finite_catalogue_oracle"]["observed_state"] == "blocked"
 
 
 def test_matrix_rejects_unknown_dependencies(tmp_path: Path) -> None:

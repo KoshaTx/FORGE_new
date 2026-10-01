@@ -2,13 +2,21 @@
 
 from collections import Counter
 from collections.abc import Mapping
+from typing import Any
 
-from forge.assembly.families import LibraryAssemblyError
+from forge.assembly.families import LibraryAssemblyError, RegistryAssemblyAdapter
 from forge.assembly.repeated_components import element_inventory
 from forge.assembly.source_event import check_source_event
 
 
-def check_condensation_event(adapter, components, target, *, net_byproducts, **kwargs) -> dict:
+def check_condensation_event(
+    adapter: RegistryAssemblyAdapter,
+    components: Mapping[str, str],
+    target: str,
+    *,
+    net_byproducts: Mapping[str, int],
+    **kwargs: Any,
+) -> dict[str, Any]:
     """Keep every source/site/uniqueness check; account explicitly for eliminated atoms."""
     if (
         not isinstance(net_byproducts, Mapping)
@@ -19,7 +27,7 @@ def check_condensation_event(adapter, components, target, *, net_byproducts, **k
     ):
         raise LibraryAssemblyError("condensation requires an explicit valid byproduct inventory")
     result = check_source_event(adapter, components, target, **kwargs)
-    left = Counter()
+    left: Counter[str] = Counter()
     for smiles in components.values():
         for element, count in element_inventory(smiles).items():
             left[element] += count

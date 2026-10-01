@@ -356,8 +356,10 @@ if nn is not None:
             # A newly attached specialist must reproduce the authenticated shared checkpoint
             # exactly before its first update.  Zeroing only the terminal projection preserves a
             # useful random input projection while making the residual identically zero.
-            nn.init.zeros_(self.adapter[-1].weight)
-            nn.init.zeros_(self.adapter[-1].bias)
+            projection = cast(nn.Linear, self.adapter[-1])
+            assert projection.bias is not None
+            nn.init.zeros_(projection.weight)
+            nn.init.zeros_(projection.bias)
 
         def forward(self, hidden: Any) -> Any:
             return self.adapter(hidden)
@@ -542,8 +544,10 @@ if nn is not None:
                 for _ in range(role_states)
             )
             for decoder in self.role_decoders:
-                nn.init.zeros_(decoder[-1].weight)
-                nn.init.zeros_(decoder[-1].bias)
+                projection = cast(nn.Linear, cast(nn.Sequential, decoder)[-1])
+                assert projection.bias is not None
+                nn.init.zeros_(projection.weight)
+                nn.init.zeros_(projection.bias)
 
         def forward(
             self,

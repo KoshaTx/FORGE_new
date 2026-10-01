@@ -3,12 +3,17 @@
 from __future__ import annotations
 
 from collections import defaultdict
-from collections.abc import Mapping
+from collections.abc import Collection, Mapping
 
 from rdkit import Chem, rdBase
 
 from forge.assembly.families import LibraryAssemblyError, constitutional_molecule
-from forge.assembly.program_atom_origins import SemanticReplay, _clear_labels, canonical_coordinates
+from forge.assembly.program_atom_origins import (
+    ProgramAtomOrigins,
+    SemanticReplay,
+    _clear_labels,
+    canonical_coordinates,
+)
 from forge.assembly.sequential_program import RegistrySequentialProgram
 from forge.assembly.staged_program import RegistryStagedProgram, _constraints
 
@@ -58,9 +63,10 @@ def trace_staged_program(
         _constraints(smiles, spec["terminal_constraints"][role], bounds.maximum_outcomes)["pass"]
         for role, smiles in canonical.items()
     )
-    encode, decode = {}, {}
+    encode: dict[tuple[str, tuple[str, ...]], int] = {}
+    decode: dict[int, tuple[str, tuple[str, ...]]] = {}
 
-    def tag(role, core):
+    def tag(role: str, core: Collection[str]) -> int:
         pair = (role, tuple(sorted(core)))
         if pair not in encode:
             index = len(encode) + 1
@@ -79,7 +85,13 @@ def trace_staged_program(
     current = {Chem.MolToSmiles(initial, isomericSmiles=True): initial}
     layers, transitions = [1], 0
 
-    def result(disposition, *, complete=False, annotations=None, products=()):
+    def result(
+        disposition: str,
+        *,
+        complete: bool = False,
+        annotations: ProgramAtomOrigins | None = None,
+        products: Collection[str] = (),
+    ) -> SemanticReplay:
         return SemanticReplay(
             disposition, complete, annotations, tuple(products), tuple(layers), transitions
         )
@@ -96,7 +108,7 @@ def trace_staged_program(
         added = stage.get("added_roles", [stage.get("added_role")])
         if set(adapter.roles) != {stage["accumulator_role"], *added}:
             raise LibraryAssemblyError("Staged adapter roles differ from the source stage")
-        following = {}
+        following: dict[str, Chem.Mol] = {}
         for _, state in sorted(current.items()):
             reactants = tuple(
                 Chem.Mol(state if role == stage["accumulator_role"] else molecules[role])
@@ -170,21 +182,25 @@ def trace_staged_program(
             ambiguous = True
         else:
             annotations.add(value)
-    products = tuple(sorted(products))
-    if len(products) != 1:
-        return result("ambiguous_forward_products", complete=True, products=products)
+    ordered_products = tuple(sorted(products))
+    if len(ordered_products) != 1:
+        return result("ambiguous_forward_products", complete=True, products=ordered_products)
     if ambiguous or len(annotations) != 1:
-        return result("ambiguous_forward_atom_coordinates", complete=True, products=products)
+        return result(
+            "ambiguous_forward_atom_coordinates", complete=True, products=ordered_products
+        )
     if (
         not terminal_pass
-        or not _constraints(products[0], spec["product_constraints"], bounds.maximum_outcomes)[
-            "pass"
-        ]
+        or not _constraints(
+            ordered_products[0], spec["product_constraints"], bounds.maximum_outcomes
+        )["pass"]
     ):
-        return result("outside_qualified_program_constraints", complete=True, products=products)
+        return result(
+            "outside_qualified_program_constraints", complete=True, products=ordered_products
+        )
     return result(
         "unique_forward_atom_coordinates",
         complete=True,
         annotations=next(iter(annotations)),
-        products=products,
+        products=ordered_products,
     )

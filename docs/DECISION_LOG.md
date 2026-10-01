@@ -24124,3 +24124,20 @@ Exact removals, replacements, test receipts, source identities, replay commands,
 are recorded under `results/maintenance/legacy_cleanup_v1/`. Historical artifacts, scientific
 thresholds, frozen inputs, and unrelated manuscript work were preserved. No training, remote job,
 commit, or push was launched.
+
+
+## 2026-10-01 — FORGE release tooling and documentation
+
+Use the supplied three-family manuscript in `paper/submission/FORGE.pdf` as the paper
+reference, with installation/generation instructions, an implementation map, examples and
+an MIT license. The user clarified the experimental administration route as intramuscular;
+the original experimental record is unchanged.
+
+Added a generation CLI using the existing loader, sampler and exact-L1 checks. Preserve
+checkpoint/input hashes, all attempts and deterministic settings. Paper-checkpoint generation
+remains untested until the model bundle is supplied; smoke tests use separate small weights.
+
+Retain the typing/runtime fixes, frozen dependency installation, public test-data fetcher
+and explicit reporting of tests requiring unavailable inputs. At the user's request, remove
+this branch's historical source-archive additions, audit inventories and dedicated audit CI
+jobs. Pre-existing research records and scientific evaluation criteria are unchanged.

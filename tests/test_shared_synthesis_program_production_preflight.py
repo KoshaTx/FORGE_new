@@ -82,12 +82,19 @@ def _documents_from(path: Path) -> tuple[dict[str, object], ...]:
     )
 
 
+@pytest.mark.requires_artifacts(
+    "results/phase1/shared_synthesis_program_production_readiness_v5/test_baseline.json",
+)
 def test_preflight_static_contract_closes_every_local_gate() -> None:
     gates = _validate_static_contract(*_documents())
     assert all(gates.values())
     assert _validate_molecule_rendering() is True
 
 
+@pytest.mark.requires_artifacts(
+    "results/phase1/transformer_synthesis_program_production_smoke_v1/training_result.json",
+    "results/phase1/transformer_synthesis_program_production_smoke_v1/evaluation_result.json",
+)
 def test_transformer_preflight_is_bound_to_current_smoke_and_regression_receipts() -> None:
     documents = _documents_from(TRANSFORMER_CONFIG)
     gates = _validate_static_contract(*documents)
@@ -163,6 +170,9 @@ def test_preflight_exercises_every_frozen_layout_cell_and_preserves_seed_contrac
     )
 
 
+@pytest.mark.requires_artifacts(
+    "results/phase1/shared_synthesis_program_production_readiness_v5/test_baseline.json",
+)
 def test_preflight_refuses_authorization_or_evaluation_budget_drift() -> None:
     documents = list(_documents())
     unauthorized = copy.deepcopy(documents[0])
@@ -177,6 +187,10 @@ def test_preflight_refuses_authorization_or_evaluation_budget_drift() -> None:
 
 
 @pytest.mark.parametrize("gpu_type", ["L4", "A100-40GB", "H100!"])
+@pytest.mark.requires_artifacts(
+    "data/source_cache/m0_09_publishers/PMC10544676/assets/41587_2023_1679_MOESM1_ESM.pdf",
+    "data/source_cache/m0_09_review_assets/PMC10904786/41467_2024_45422_MOESM1_ESM.pdf",
+)
 def test_modal_benchmark_plan_requests_one_exact_accelerator(gpu_type: str) -> None:
     plan = modal_request_plan(REPO, SPECS[gpu_type], profile="smoke", replicate=0, device=None)
     assert plan["resource_envelope"]["gpu_type"] == gpu_type
@@ -379,3 +393,54 @@ def test_checkpoint_archive_rejects_any_unexpected_member(tmp_path: Path) -> Non
     with tarfile.open(path) as archive:
         with pytest.raises(SynthesisProgramProductionEvaluationError, match="members differ"):
             _validate_archive_members(archive, training)
+
+
+@pytest.mark.parametrize(
+    "corruption", ["authorization", "budget", "smoke_failure", "new_test_failure"]
+)
+def test_static_preflight_rejects_corrupted_unit_receipts(corruption: str) -> None:
+    """Synthetic receipts exercise admission logic; they are not historical run evidence."""
+    config = json.loads(CONFIG.read_text())
+    inputs = config["inputs"]
+    design = json.loads((REPO / inputs["production_design"]["path"]).read_text())
+    training = json.loads((REPO / inputs["production_training_config"]["path"]).read_text())
+    evaluation = json.loads((REPO / inputs["production_evaluation_config"]["path"]).read_text())
+    smoke_training = {
+        "schema_version": "forge.synthesis_program_production_training_result.v1",
+        "profile": "smoke",
+        "status": "pass",
+        "gates": {"synthetic_fixture": True},
+        "config": inputs["production_training_config"],
+        "cache": inputs["production_cache"],
+    }
+    smoke_evaluation = {
+        "schema_version": "forge.synthesis_program_production_evaluation_result.v1",
+        "profile": "smoke",
+        "status": "pass",
+        "gates": {"synthetic_fixture": True},
+        "config": inputs["production_evaluation_config"],
+        "cache": inputs["production_cache"],
+        "selection": {"candidate_selection": False},
+        "calls": {"route": 0, "oracle": 0},
+    }
+    baseline = {
+        "no_new_failures": True,
+        "new_failures": [],
+        "current_failure_count": 0,
+        "baseline_failure_count": 0,
+        "stale_cache_nodes": [],
+    }
+    documents = (config, design, training, evaluation, smoke_training, smoke_evaluation, baseline)
+    assert all(_validate_static_contract(*documents).values())
+    if corruption == "authorization":
+        config["authorization"]["authorized"] = False
+        with pytest.raises(SynthesisProgramProductionPreflightError, match="not authorized"):
+            _validate_static_contract(*documents)
+    else:
+        if corruption == "budget":
+            evaluation["full"]["heldout_samples"] -= 1
+        elif corruption == "smoke_failure":
+            smoke_training["gates"]["synthetic_fixture"] = False
+        else:
+            baseline["new_failures"] = ["synthetic_failure"]
+        assert not all(_validate_static_contract(*documents).values())

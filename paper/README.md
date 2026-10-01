@@ -1,13 +1,23 @@
 # FORGE paper versions
 
-- `v0/` contains the archived ICLR 2027 LaTeX manuscript and its complete local asset tree.
-- `v1/` contains the computational-only Nature Biotechnology manuscript now under development.
-- `v1_iclr/` contains the self-contained, anonymous ICLR 2027 manuscript and its Overleaf export;
-  see [`v1_iclr/README.md`](v1_iclr/README.md) for build commands and input provenance.
-- `forge_paper/` contains repository tooling for verifying and packaging the archived v0 manuscript.
+**Start with [`submission/`](submission/README.md) and its exact supplied PDF.**
 
-The v0 reproduction contract is `configs/reproduction/iclr2027.json`. The v1 manuscript begins with
-`v1/OUTLINE.md`; planned results remain explicit placeholders until their verified artifacts exist.
-The separate v1 experiment matrix is `configs/reproduction/natbiotech_v1_experiments.json`; inspect
-it with `forge paper experiments`. This command audits experiment readiness and does not claim that
-the configured external baselines or ablations have run.
+| Directory | Role |
+|---|---|
+| [`submission/`](submission/README.md) | Author-supplied 39-page PDF, paper-to-code map, checkpoint access and generation instructions |
+| [`v1_iclr/`](v1_iclr/README.md) | Earlier related three-family manuscript sources, generated tables, figures and provenance |
+| `v1_iclr22/` | Separate 22-family study; not the submission's three-family model |
+| `v1/` | Historical Nature Biotechnology working draft and shared result renderings |
+| `v1_neurips/`, `v1_neuripsgem/` | Earlier venue-specific manuscript revisions |
+| `v0/` | Archived manuscript with a separate frozen reproduction contract |
+| `forge_paper/` | Paper verification, result rendering and packaging tools; commands have distinct contracts |
+
+The submitted PDF is newer than the checked-in `v1_iclr` LaTeX/Overleaf exports. See
+[`submission/README.md`](submission/README.md#manuscript-source-status) before attempting to build it.
+
+`forge paper verify/reproduce/build/doctor` and `configs/reproduction/iclr2027.json` target **v0**.
+`forge paper experiments` audits a historical v1 experiment matrix; it does not claim that every
+configured experiment has run. Neither command family establishes reproduction of the
+submitted paper.
+
+Historical source, table and figure paths remain stable because provenance records pin their bytes.

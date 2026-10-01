@@ -11,7 +11,12 @@ from forge.assembly.families import (
     RegistryAssemblyAdapter,
     constitutional_molecule,
 )
-from forge.assembly.program_atom_origins import SemanticReplay, _clear_labels, canonical_coordinates
+from forge.assembly.program_atom_origins import (
+    ProgramAtomOrigins,
+    SemanticReplay,
+    _clear_labels,
+    canonical_coordinates,
+)
 from forge.assembly.repeated_components import RepeatBounds
 
 ASSEMBLY_INTRODUCED = "assembly_introduced"
@@ -73,10 +78,14 @@ def trace_single_introduction_program(
             atom.SetIsotope(index)
     with rdBase.BlockLogs():
         outcomes = reaction.RunReactants(reactants, maxProducts=bounds.maximum_outcomes)
-    states, products, assignments = set(), set(), set()
+    states: set[str] = set()
+    products: set[str] = set()
+    assignments: set[ProgramAtomOrigins] = set()
     ambiguous = False
 
-    def result(disposition, *, complete=False, annotation=None):
+    def result(
+        disposition: str, *, complete: bool = False, annotation: ProgramAtomOrigins | None = None
+    ) -> SemanticReplay:
         return SemanticReplay(
             disposition,
             complete,

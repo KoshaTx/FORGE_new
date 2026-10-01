@@ -182,7 +182,7 @@ def assess_common_route_evidence(
         bool(row["common_route_evidence"]["terminal_evidence"]) for row in assessed
     )
     complete_count = sum(bool(row["common_route_evidence"]["complete_dossier"]) for row in assessed)
-    abstained = sum(bool(row["common_route_evidence"]["abstained"]) for row in assessed)
+    abstained_count = sum(bool(row["common_route_evidence"]["abstained"]) for row in assessed)
     result = {
         "schema_version": "forge.common_ugi_route_evidence_assessment.v1",
         "attempts": len(assessed),
@@ -195,7 +195,7 @@ def assess_common_route_evidence(
         "complete_dossier_fraction_among_eligible": (
             complete_count / eligible if eligible else None
         ),
-        "abstentions": abstained,
+        "abstentions": abstained_count,
         "dispositions": dict(sorted(dispositions.items())),
         "route_or_oracle_calls": 0,
         "assessment_mode": (

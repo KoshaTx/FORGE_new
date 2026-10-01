@@ -1,7 +1,7 @@
 [project]
 name = "forge"
 version = "0.0.1"
-description = "Route-grounded generative design of synthetically executable ionizable lipids"
+description = "Reaction-guided generative design of ionizable lipids"
 readme = "README.md"
 license = { text = "MIT" }
 requires-python = ">=3.10"
@@ -24,7 +24,7 @@ dependencies = [
 forge = "cli:main"
 
 [project.optional-dependencies]
-# M0-06 feasibility probe only. Not for training runs.
+# Neural model training and sampling; historical runs have additional pinned inputs.
 torch = ["torch>=2.2", "torch-geometric>=2.5"]
 # M0-07 oracle matrix and released-checkpoint diagnostics.
 oracle = ["torch>=2.2", "xgboost>=2.0", "matplotlib>=3.8"]
@@ -110,6 +110,7 @@ pythonpath = ["tools", "paper"]
 testpaths = ["tests"]
 addopts = "-q"
 markers = [
+    "requires_artifacts(*paths): runs only when the named historical inputs are present; --require-external-artifacts makes absence fatal",
     "needs_vendor: requires `make vendor` to have run",
     "needs_r1: requires the optional 96 MB R1 asset",
 ]

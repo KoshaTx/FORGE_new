@@ -2,15 +2,28 @@
 
 from __future__ import annotations
 
+from collections.abc import Mapping, Sequence
+from typing import Any
+
 from rdkit import Chem, rdBase
 
 from forge.assembly.condensation_event import check_condensation_event
-from forge.assembly.families import LibraryAssemblyError, constitutional_molecule
+from forge.assembly.families import (
+    LibraryAssemblyError,
+    RegistryAssemblyAdapter,
+    constitutional_molecule,
+)
 
 
 def check_retained_condensation(
-    adapter, components, target, *, retained_queries, maximum_outcomes=256, **kwargs
-):
+    adapter: RegistryAssemblyAdapter,
+    components: Mapping[str, str],
+    target: str,
+    *,
+    retained_queries: Sequence[Mapping[str, Any]],
+    maximum_outcomes: int = 256,
+    **kwargs: Any,
+) -> dict[str, Any]:
     """Require surviving source-role handles without using them to prune outcomes.
 
     The predicate is evaluated on atom provenance in the raw product, so a basic
@@ -19,7 +32,7 @@ def check_retained_condensation(
     result = check_condensation_event(
         adapter, components, target, maximum_outcomes=maximum_outcomes, **kwargs
     )
-    constraints = []
+    constraints: list[tuple[Mapping[str, Any], Chem.Mol]] = []
     for item in retained_queries:
         query = Chem.MolFromSmarts(item["smarts"])
         if (

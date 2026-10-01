@@ -236,11 +236,16 @@ def render_gem_table3_route_assessment(
         path = resolve_pin(pin, repo, label=f"GEM Table 3 assessed attempts seed {seed}")
         rows.extend(_load_assessed(path, method_id=str(method_id), seed=seed))
         source_records.append(pin_record(path, repo))
+    if any(
+        not isinstance(inputs.get(key), Mapping)
+        for key in ("route_evidence_result", "component_evidence")
+    ):
+        raise GemTable3Error("GEM Table 3 evidence pins are malformed")
     evidence_result_path = resolve_pin(
-        inputs.get("route_evidence_result"), repo, label="GEM Table 3 route evidence result"
+        inputs["route_evidence_result"], repo, label="GEM Table 3 route evidence result"
     )
     evidence_path = resolve_pin(
-        inputs.get("component_evidence"), repo, label="GEM Table 3 component evidence"
+        inputs["component_evidence"], repo, label="GEM Table 3 component evidence"
     )
     evidence_result = read_json_object(
         evidence_result_path, error=GemTable3Error, label="GEM Table 3 route evidence result"
@@ -276,7 +281,7 @@ def render_gem_table3_route_assessment(
         raise GemTable3Error("GEM Table 3 population contract is malformed")
     selected = _select_products(rows, sample_size=sample_size, salt=salt)
     assessed, components, states = _assess_products(selected, evidence=evidence)
-    summary = {
+    summary: dict[str, Any] = {
         "products": len(assessed),
         "components": len(components),
         "product_states": dict(sorted(states["products"].items())),
@@ -307,7 +312,7 @@ def render_gem_table3_route_assessment(
     output_dir.mkdir(parents=True, exist_ok=True)
     macro_path = output_dir / "gem_table3_route_macros.tex"
     atomic_write(macro_path, _macro_text(summary).encode("utf-8"))
-    result = {
+    result: dict[str, Any] = {
         "schema_version": RESULT_SCHEMA,
         "status": "complete",
         "config": pin_record(config_path, repo),

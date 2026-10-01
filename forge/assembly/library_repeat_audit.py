@@ -45,7 +45,9 @@ def replay_diagnostic_steps(
     return True
 
 
-def _dead_end(adapter: RegistryAssemblyAdapter, smiles: str, maximum_outcomes: int) -> dict:
+def _dead_end(
+    adapter: RegistryAssemblyAdapter, smiles: str, maximum_outcomes: int
+) -> dict[str, Any]:
     """Inspect exact algebraic inverse/forward candidates solely to explain a strict dead end.
 
     This returns no accepted step or substructure-hit metric. A raw exact transform outside the
@@ -65,7 +67,11 @@ def _dead_end(adapter: RegistryAssemblyAdapter, smiles: str, maximum_outcomes: i
         if any(item is None for item in repaired):
             continue
         candidates.add(
-            tuple((role, item[0]) for role, item in zip(adapter.roles, repaired, strict=True))
+            tuple(
+                (role, item[0])
+                for role, item in zip(adapter.roles, repaired, strict=True)
+                if item is not None
+            )
         )
     for candidate in sorted(candidates):
         components = dict(candidate)
@@ -86,7 +92,7 @@ def _dead_end(adapter: RegistryAssemblyAdapter, smiles: str, maximum_outcomes: i
     return {"reason": "no_verified_inverse_forward_step", "product": target, "accepted": False}
 
 
-def _program(steps: tuple[DiagnosticStep, ...], accumulator_role: str) -> dict:
+def _program(steps: tuple[DiagnosticStep, ...], accumulator_role: str) -> dict[str, Any]:
     identities = [
         tuple((r, s) for r, s in step.components if r != accumulator_role) for step in steps
     ]
@@ -122,7 +128,7 @@ def audit_repeated_program(
     path_counts: dict[str, int] = {}
     full_programs, shorter_example = [], None
     dead_ends: Counter[str] = Counter()
-    dead_end_examples: dict[str, dict] = {}
+    dead_end_examples: dict[str, dict[str, Any]] = {}
     reason = None
     try:
         for level in range(1, depth + 1):
@@ -185,13 +191,13 @@ def audit_repeated_program(
         "verified_path_counts_by_depth": path_counts,
         "requested_depth_programs": [] if reason else full_programs,
         "shorter_program_example": shorter_example,
-        "dead_end_counts": dict(sorted(dead_ends.items())),
+        "dead_end_counts": dict[str, Any](sorted(dead_ends.items())),
         "dead_end_examples": dead_end_examples,
         "original_gate_changed": False,
     }
 
 
-def classify_repeat_attempt(original_status: str, audit: dict | None) -> str:
+def classify_repeat_attempt(original_status: str, audit: dict[str, Any] | None) -> str:
     if original_status == "invalid_graph":
         return "invalid_graph"
     if original_status == "abstain":

@@ -1,5 +1,54 @@
 # Test workflow
 
+## Pull-request checks
+
+CI runs study compatibility and core code checks. Typing, linting and tests each run after a
+successful dependency installation, even when another check fails. Local equivalents are
+`make typecheck`, `make lint-core`, and `make test-core`.
+
+The older `make verify-pins` and combined `make check-core` commands also check historical
+records. They remain available but are not CI requirements for this code release. Passing
+current-code tests does not establish reproduction of historical experiments.
+
+The core tests use the public LNPDB CSV at the exact upstream commit and SHA-256 already recorded
+in `forge_data.vendor`. CI fetches and verifies it before testing. To fetch that input locally:
+
+```sh
+uv run --frozen python -m forge_data.fetch lnpdb_fc7c389.csv
+```
+
+The fetcher does not rewrite the vendor manifest, accept changed bytes, or replace a corrupt local
+copy. The full vendor command also requires historical workstation inputs; this selected download
+does not supply those inputs or the paper checkpoints.
+
+Tests that require unavailable historical receipts, ledgers or publisher supplements declare their
+exact paths with `requires_artifacts`. They report **SKIPPED**, with every missing path in the pytest
+summary, rather than counting as a reproduction pass. Present files still undergo the original
+assertions; corruption is not a reason to skip. Small synthetic unit tests separately exercise
+preflight rejection and missing-input behavior and never become scientific evidence. CI uploads the
+`core-test-results` JUnit report, including skips. For strict reproduction, fail on missing inputs:
+
+```sh
+uv run --frozen pytest --require-external-artifacts -ra tests/test_shared_synthesis_program_production_preflight.py
+```
+
+This option covers the explicitly declared external-artifact tests. The older unrecoverable-pin
+quarantine remains separately reported. Neither a smoke test nor an input check reproduces
+the paper's experiments.
+
+## Choosing a test scope
+
+The generation wrapper has a focused check:
+
+```sh
+uv run --frozen pytest -q tests/test_reviewer_generation.py
+```
+
+It verifies input/CLI/output behavior and explicitly uses the committed small smoke archive for
+runtime checks across all three programs. It does not admit those smoke weights through the public
+paper-checkpoint input check or claim paper-model qualification. The core CI job runs these checks
+with Torch installed and uploads their JUnit report alongside the core-test report.
+
 Use the smallest relevant check during development. The repository-wide suite includes complete
 corpus rebuilds, byte-reproducibility runs, model exercises, and verification of historical
 experiment artifacts. Historical reproduction is separate from new training readiness; missing

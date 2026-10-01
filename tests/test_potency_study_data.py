@@ -64,6 +64,7 @@ def test_corpus_is_lnpdb_only_deterministic_and_row_preserving(tmp_path: Path) -
 
 
 @pytest.mark.needs_vendor
+@pytest.mark.requires_artifacts("results/phase1/potency_study_corpus_v2/observations.csv.gz")
 def test_checked_in_corpus_matches_the_authenticated_builder(tmp_path: Path) -> None:
     ledger, result = _build(tmp_path / "rebuilt")
 

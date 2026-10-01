@@ -3,7 +3,7 @@ name: FORGE core checks
 on:
   pull_request:
   push:
-    branches: [main]
+    branches: [main, master]
 
 jobs:
   study-compatibility:
@@ -16,7 +16,7 @@ jobs:
       - name: Install locked development environment
         run: uv sync --frozen --extra dev --extra torch
       - name: Check both study interfaces without training
-        run: uv run make test-study-compatibility
+        run: uv run --frozen make test-study-compatibility
   core:
     runs-on: ubuntu-latest
     steps:
@@ -25,6 +25,35 @@ jobs:
         with:
           enable-cache: true
       - name: Install locked development environment
+        id: install
         run: uv sync --frozen --extra dev --extra torch
-      - name: Verify architecture, provenance, and runner contracts
-        run: uv run make check-core
+      - name: Check CLI, dependency and data handling
+        run: uv run --frozen pytest -q tests/test_ci_frozen.py tests/test_public_data_fetch.py tests/test_external_artifact_requirements.py tests/test_potency_stage_contract.py
+      - name: Check generation wrapper with separate smoke weights
+        run: uv run --frozen pytest -q tests/test_reviewer_generation.py --junitxml=build/reviewer-generation-tests.xml
+      - name: Check zero-initialized adapter identity
+        if: ${{ !cancelled() && steps.install.outcome == 'success' }}
+        run: >-
+          uv run --frozen pytest -q
+          tests/test_reaction_specialization.py::test_specialist_is_an_exact_zero_delta_before_fine_tuning
+          tests/test_reaction_specialization.py::test_role_local_tree_decoder_is_identity_then_changes_only_target_program
+      - name: Check types
+        if: ${{ !cancelled() && steps.install.outcome == 'success' }}
+        run: uv run --frozen make typecheck
+      - name: Check lint
+        if: ${{ !cancelled() && steps.install.outcome == 'success' }}
+        run: uv run --frozen make lint-core
+      - name: Fetch and verify the public LNPDB test input
+        if: ${{ !cancelled() && steps.install.outcome == 'success' }}
+        run: uv run --frozen python -m forge_data.fetch lnpdb_fc7c389.csv
+      - name: Test architecture and runner contracts
+        if: ${{ !cancelled() && steps.install.outcome == 'success' }}
+        run: uv run --frozen make test-core
+      - uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
+        with:
+          name: core-test-results
+          path: |
+            build/core-tests.xml
+            build/reviewer-generation-tests.xml
+          if-no-files-found: error
