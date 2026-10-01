@@ -66,15 +66,16 @@ not the paper's production model.
 
 ```bash
 uv sync --frozen --extra dev --extra torch
-uv run forge --help
-uv run make test-one TEST=tests/test_review_submission.py
+uv run --frozen forge --help
+uv run --frozen make test-one TEST=tests/test_review_submission.py
 ```
 
 Installing dependencies requires network access. Training, sampling and data preparation have
 additional hash-pinned inputs; follow the [artifact guide](paper/submission/ARTIFACTS.md) before
-running them. `make vendor` refers to paths on the original workstation and is not a public data
-download command. The current lockfile is a development environment, not a recovered historical
-training environment.
+running them. `make vendor` includes paths on the original workstation and cannot populate all
+inputs from public downloads alone. The [test guide](docs/TESTING.md) explains how to fetch the
+already-pinned public LNPDB input and how unavailable historical tests are reported. The current
+lockfile is a development environment, not a recovered historical training environment.
 
 | Directory | Purpose |
 |---|---|

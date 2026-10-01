@@ -49,7 +49,7 @@ def modal_call_receipt_path(repo: Path, request_id: str) -> Path:
     return repo.resolve() / "runs" / "_modal_calls" / f"{request_id}.json"
 
 
-def modal_restart_receipt_path(repo: Path, plan: Mapping, previous: Path) -> Path:
+def modal_restart_receipt_path(repo: Path, plan: Mapping[str, Any], previous: Path) -> Path:
     """Bind a new attempt to the unchanged request and preserve its parent receipt."""
     previous = previous.resolve()
     previous.relative_to((repo / "runs" / "_modal_calls").resolve())
@@ -75,7 +75,7 @@ def require_terminal_modal_call(call: Any) -> str:
         "TIMEOUT",
     }:
         raise BackendError("Prior Modal call is not confirmed failed, terminated or timed out")
-    return roots[0].status.name
+    return str(roots[0].status.name)
 
 
 def _config_dependency_uploads(repo: Path, config_path: Path) -> dict[str, Path]:

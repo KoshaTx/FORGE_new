@@ -4,12 +4,17 @@ Source component predicates augment the unfiltered inverse and forward search.
 They cannot remove competing outcomes to manufacture a unique reconstruction.
 """
 
+from collections.abc import Mapping, Sequence
+from typing import Any, cast
+
 from forge.assembly.families import LibraryAssemblyError, constitutional_molecule
 from forge.assembly.repeated_components import replay_repeated_components
 from forge.assembly.repeated_inverse import infer_repeated_components
 
 
-def source_component_checks(executor, components):
+def source_component_checks(
+    executor: dict[str, Any], components: Mapping[str, str]
+) -> dict[str, bool]:
     """Reuse preparation's extra component domains, including fixed AEMA identity."""
     checks = {}
     if "fixed_AEMA" in executor:
@@ -32,10 +37,10 @@ def source_component_checks(executor, components):
                 components["thiol_periphery"], executor["ester_thiol_domain"]
             )
     elif executor.get("domain_kind") == "ester_thiol":
-        from forge.corpus.compose_lipid_ester_thiol import component_domain
+        from forge.corpus.compose_lipid_ester_thiol import component_domain as ester_only_domain
 
         checks["ester_thiol_domain"] = all(
-            component_domain(components[role], executor["domain"])
+            ester_only_domain(components[role], executor["domain"])
             for role in executor["domain_roles"]
         )
     elif "domain" in executor and executor["kind"] != "fixed":
@@ -43,7 +48,7 @@ def source_component_checks(executor, components):
     return checks
 
 
-def evaluate_executor(executor, product, *, events):
+def evaluate_executor(executor: dict[str, Any], product: str, *, events: int) -> dict[str, Any]:
     """Assess every inferred tuple with the original source replay and extra guards."""
     if executor.get("full_source_contract") is not True:
         raise ValueError("Generated evaluation requires an explicit complete source contract")
@@ -59,7 +64,7 @@ def evaluate_executor(executor, product, *, events):
             bounds=bounds,
         )
 
-        def replay(parts):
+        def replay(parts: dict[str, str]) -> dict[str, Any]:
             return replay_repeated_components(
                 adapter,
                 parts,
@@ -74,8 +79,8 @@ def evaluate_executor(executor, product, *, events):
         program = executor["program"]
         inverse = program.infer(target)
 
-        def replay(parts):
-            return program.replay(parts, target)
+        def replay(parts: dict[str, str]) -> dict[str, Any]:
+            return cast(dict[str, Any], program.replay(parts, target))
 
     elif kind == "fixed":
         candidates = executor["adapter"].decompose(
@@ -86,8 +91,8 @@ def evaluate_executor(executor, product, *, events):
             "candidate_components": [dict(c.components) for c in candidates],
         }
 
-        def replay(parts):
-            return executor["run"](parts, target)
+        def replay(parts: dict[str, str]) -> dict[str, Any]:
+            return cast(dict[str, Any], executor["run"](parts, target))
 
     else:
         raise ValueError(f"Unsupported complete source executor: {kind}")
@@ -97,7 +102,7 @@ def evaluate_executor(executor, product, *, events):
             mapping = executor["mapping"]
             if set(parts) != set(mapping):
                 raise ValueError("Inverse components differ from the qualified source roles")
-            identities = {}
+            identities: dict[str, set[str]] = {}
             for role, smiles in parts.items():
                 identities.setdefault(mapping[role], set()).add(smiles)
             source_identity_exact = all(len(v) == 1 for v in identities.values())
@@ -127,7 +132,9 @@ def evaluate_executor(executor, product, *, events):
     )
 
 
-def assess_product(executors, product, *, events):
+def assess_product(
+    executors: Sequence[dict[str, Any]], product: str, *, events: int
+) -> dict[str, Any]:
     """Preserve bounded abstentions and return all considered source contracts."""
     if not executors:
         return dict(status="abstained", exact=False, reason="no_matching_qualified_executor")

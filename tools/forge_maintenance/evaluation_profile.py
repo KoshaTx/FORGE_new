@@ -97,7 +97,7 @@ def _reduced_config(
 
     if source.get("schema_version") != CONFIG_SCHEMA:
         raise EvaluationProfileError("profiled config is not a production evaluation config")
-    config = json.loads(json.dumps(source))
+    config: dict[str, Any] = json.loads(json.dumps(source))
     full = config["full"]
     full["device"] = "cpu"
     full["calibration_samples"] = int(calibration_samples)

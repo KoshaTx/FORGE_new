@@ -67,10 +67,14 @@ The four signals are 599,700; 2,036,000; 2,881,000; and 219,500 RLU for FORGE-1,
 FORGE-3 and MC3. `2,881,000 / 219,500 = 13.125…`, reported as 13.1-fold in the paper.
 They are not means over biological replicates; no significance test or error bars are supplied.
 
-There are author questions to resolve before claiming exact experimental reproducibility:
+**Administration route: intramuscular**, as stated in §4.6 of the submitted PDF and confirmed by
+the user during reviewer cleanup on 2026-09-30. The dated
+[clarification record](experimental_clarifications.json) supersedes the provisional intravenous
+description in the older evidence record for this submission. The older record remains unchanged
+for traceability; this clarification does not independently verify laboratory execution.
 
-- §4.6 of the supplied PDF says **intramuscular** administration. The retained evidence record
-  says **intravenous; explicit confirmation requested**. Neither record is silently overwritten here.
+There are remaining author questions before claiming exact experimental reproducibility:
+
 - The abstract/§4.6 use potency language, while the introduction and Appendix B.5 distinguish the
   single reporter values from biological potency and variability. The README reports the signals
   and fold ratio without adding a statistical efficacy claim.

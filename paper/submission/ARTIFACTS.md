@@ -8,7 +8,7 @@ python3 tools/review_submission.py --json > /tmp/forge-review-report.json
 ```
 
 Python 3.10+ is sufficient; no installation, network, RDKit, PyTorch, credentials or GPU is needed.
-The checker hashes the 121 indexed review assets and recomputes the conditioned Table 1 means and
+The checker hashes the 122 indexed review assets and recomputes the conditioned Table 1 means and
 sample SDs from the nine Table 4 rows. It also inspects 72 explicitly indexed historical input pins.
 At the cleanup baseline, **6 are available with matching hashes and 66 are missing**. Its JSON
 output lists every path, expected hash and current status. The inventory covers direct references
@@ -70,12 +70,12 @@ uv sync --frozen --extra dev --extra torch
 Then render into a **new scratch directory**, leaving frozen manuscript tables intact:
 
 ```bash
-uv run forge paper render-gem-table1 \
+uv run --frozen forge paper render-gem-table1 \
   --config configs/reproduction/gem_table1_core_saturation_complete_v1.json \
   --output /tmp/forge-table1-review/generated \
   --result /tmp/forge-table1-review/result.json
 
-uv run forge paper render-completed-evidence-v1 \
+uv run --frozen forge paper render-completed-evidence-v1 \
   --config configs/reproduction/natbiotech_v1_completed_evidence_v1.json \
   --output /tmp/forge-completed-review/generated \
   --result /tmp/forge-completed-review/result.json

@@ -12,7 +12,11 @@ from collections.abc import Mapping, Sequence
 
 from rdkit import Chem, rdBase
 
-from forge.assembly.families import LibraryAssemblyError, constitutional_molecule
+from forge.assembly.families import (
+    LibraryAssemblyError,
+    RegistryAssemblyAdapter,
+    constitutional_molecule,
+)
 from forge.assembly.library_programs import LibraryProgramLimits
 
 
@@ -34,7 +38,7 @@ def normalize_occurrences(occurrences: Sequence[Sequence[int]]) -> tuple[tuple[i
 
 
 def trace_precursor_occurrences(
-    adapter,
+    adapter: RegistryAssemblyAdapter,
     components: Mapping[str, str],
     intermediate_products: Sequence[str],
     *,
@@ -65,7 +69,7 @@ def trace_precursor_occurrences(
     metadata = {}
     next_label = 1001
 
-    def tagged(role, occurrence):
+    def tagged(role: str, occurrence: int) -> Chem.Mol:
         nonlocal next_label
         mol = Chem.Mol(precursor[role])
         for atom in mol.GetAtoms():
@@ -76,7 +80,7 @@ def trace_precursor_occurrences(
             next_label += 1
         return mol
 
-    def clear(mol):
+    def clear(mol: Chem.Mol) -> Chem.Mol:
         cleared = Chem.Mol(mol)
         for atom in cleared.GetAtoms():
             atom.SetIsotope(0)
@@ -136,7 +140,7 @@ def trace_precursor_occurrences(
         if not matches or len(matches) >= maximum_matches:
             raise OccurrenceTraceError("occurrence canonical mapping absent or saturated")
         for match in matches:
-            occurrences = defaultdict(dict)
+            occurrences: defaultdict[int, dict[int, int]] = defaultdict(dict)
             for index, old in enumerate(match):
                 role, occurrence, atom = metadata[mol.GetAtomWithIdx(old).GetIsotope()]
                 if role == co_role:

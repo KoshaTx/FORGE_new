@@ -5,6 +5,8 @@ import gzip
 from collections import defaultdict
 from pathlib import Path
 
+import pytest
+
 from forge.corpus.multireaction import build_multireaction_lnpdb_corpus
 from forge.corpus.reaction_program_training import load_reaction_program_training_corpus
 from forge.model.reaction_program_sampling import sample_factorized_program_layouts
@@ -19,6 +21,10 @@ def _rows(path: Path) -> list[dict[str, str]]:
         return list(csv.DictReader(handle))
 
 
+@pytest.mark.requires_artifacts(
+    "data/source_cache/m0_09_publishers/PMC10544676/assets/41587_2023_1679_MOESM1_ESM.pdf",
+    "data/source_cache/m0_09_review_assets/PMC10904786/41467_2024_45422_MOESM1_ESM.pdf",
+)
 def test_multireaction_corpus_closes_frozen_source_gates(tmp_path: Path) -> None:
     outputs = {
         "atlas": tmp_path / "reaction_program_atlas.csv.gz",

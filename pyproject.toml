@@ -110,6 +110,7 @@ pythonpath = ["tools", "paper"]
 testpaths = ["tests"]
 addopts = "-q"
 markers = [
+    "requires_artifacts(*paths): runs only when the named historical inputs are present; --require-external-artifacts makes absence fatal",
     "needs_vendor: requires `make vendor` to have run",
     "needs_r1: requires the optional 96 MB R1 asset",
 ]

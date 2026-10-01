@@ -305,7 +305,7 @@ def sample_synthesis_program_products(
             "MOG-style semantic guidance requires one all-role target per Ugi attempt"
         )
     if (
-        mog_guidance
+        ugi_mog_semantic_guidance_policy is not None
         and ugi_mog_semantic_guidance_policy.uses_joint_realism
         and ugi_mog_semantic_guidance_policy.joint_realism_scorer is None
     ):
@@ -313,7 +313,7 @@ def sample_synthesis_program_products(
             "joint-realism MOG guidance requires one bound measured-train reference"
         )
     if (
-        mog_guidance
+        ugi_mog_semantic_guidance_policy is not None
         and ugi_mog_semantic_guidance_policy.uses_local_reference
         and ugi_mog_semantic_guidance_policy.local_chemistry_prior is None
     ):
@@ -321,10 +321,11 @@ def sample_synthesis_program_products(
             "local-chemistry MOG guidance requires one bound measured-train reference"
         )
     if (
-        mog_guidance
+        ugi_mog_semantic_guidance_policy is not None
         and ugi_mog_semantic_guidance_policy.uses_local_reference
         and (
             ugi_ester_chemotype_policy is None
+            or ugi_mog_semantic_guidance_policy.local_chemistry_prior is None
             or ugi_mog_semantic_guidance_policy.local_chemistry_prior.reaction_id
             != ugi_ester_chemotype_policy.reaction_id
         )
@@ -836,7 +837,9 @@ def sample_synthesis_program_products(
                         "requested_ugi_amine_semantic_target": (
                             None
                             if local_semantic_targets[index] is None
-                            else local_semantic_targets[index].to_mapping()
+                            else cast(
+                                UgiAmineSemanticTarget, local_semantic_targets[index]
+                            ).to_mapping()
                         ),
                         "ugi_all_role_semantic_target_applied": (
                             local_all_role_targets[index] is not None
@@ -872,7 +875,9 @@ def sample_synthesis_program_products(
                         "requested_ugi_all_role_semantic_target": (
                             None
                             if local_all_role_targets[index] is None
-                            else local_all_role_targets[index].to_mapping()
+                            else cast(
+                                UgiAllRoleSemanticTarget, local_all_role_targets[index]
+                            ).to_mapping()
                         ),
                         "requested_role_morphology": (
                             {

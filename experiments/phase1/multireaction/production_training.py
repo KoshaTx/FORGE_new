@@ -516,6 +516,7 @@ def _train_arm(
                 topology_conditioned_weight = float(
                     objective.get("topology_conditioned_chemistry_weight", 0.0)
                 )
+                topology_conditioned_predictions: dict[str, Any] | None
                 if (
                     topology_conditioned_weight > 0.0
                     and optimization["topology_conditioned_forward_mode"] == "paired_batch"

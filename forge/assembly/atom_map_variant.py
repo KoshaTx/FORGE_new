@@ -2,8 +2,9 @@
 
 from __future__ import annotations
 
-from collections.abc import Mapping
+from collections.abc import Mapping, Sequence
 from copy import deepcopy
+from typing import Any
 
 from rdkit import Chem
 from rdkit.Chem import rdChemReactions
@@ -11,7 +12,9 @@ from rdkit.Chem import rdChemReactions
 from forge.assembly.families import LibraryAssemblyError
 
 
-def derive_product_atom_map_variant(entry: dict, specification: Mapping) -> dict:
+def derive_product_atom_map_variant(
+    entry: dict[str, Any], specification: Mapping[str, Any]
+) -> dict[str, Any]:
     """Permute only product map labels among equivalent element/charge/isotope states.
 
     The permutation is supplied by a separate pinned source adjudication, never inferred from
@@ -59,7 +62,7 @@ def derive_product_atom_map_variant(entry: dict, specification: Mapping) -> dict
     if reaction is None or reaction.GetNumProductTemplates() != 1:
         raise LibraryAssemblyError("atom-map variant needs a single-product transform")
 
-    def atoms(templates):
+    def atoms(templates: Sequence[Chem.Mol]) -> dict[int, Chem.Atom]:
         found = {}
         for template in templates:
             for atom in template.GetAtoms():
@@ -75,7 +78,7 @@ def derive_product_atom_map_variant(entry: dict, specification: Mapping) -> dict
     if set(permutation) - (set(reactants) & set(products)):
         raise LibraryAssemblyError("permutation refers to absent reactant/product atom maps")
 
-    def state(atom):
+    def state(atom: Chem.Atom) -> tuple[int, int, int]:
         return atom.GetAtomicNum(), atom.GetFormalCharge(), atom.GetIsotope()
 
     for old, new in permutation.items():

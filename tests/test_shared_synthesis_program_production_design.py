@@ -162,6 +162,7 @@ def test_design_accepts_only_the_qualified_transformer_balancing_contract() -> N
 
 def test_mixed_repeat_design_changes_only_authenticated_data_contract() -> None:
     # The derived design is itself an authenticated input and therefore must live below the repo.
+    (REPO / "runs").mkdir(exist_ok=True)
     with tempfile.TemporaryDirectory(prefix="mixed-design-test-", dir=REPO / "runs") as directory:
         design_path = Path(directory) / "design.json"
         result_path = Path(directory) / "result.json"

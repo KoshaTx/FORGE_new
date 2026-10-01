@@ -156,7 +156,7 @@ class RegistryAssemblyAdapter:
     ) -> ForwardAssemblyProducts:
         _bound(maximum_outcomes)
         reactants = self._reactants(components)
-        outcomes = ()
+        outcomes: tuple[tuple[Chem.Mol, ...], ...] = ()
         if all(item.qualified for item in self._assess(reactants)):
             with rdBase.BlockLogs():
                 outcomes = self.reaction.forward.RunReactants(
@@ -215,7 +215,9 @@ class RegistryAssemblyAdapter:
             if any(item is None for item in repaired):
                 continue
             components = tuple(
-                (role, item[0]) for role, item in zip(self.roles, repaired, strict=True)
+                (role, item[0])
+                for role, item in zip(self.roles, repaired, strict=True)
+                if item is not None
             )
             candidates.add(components)
         result = []

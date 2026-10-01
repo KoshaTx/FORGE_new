@@ -389,7 +389,7 @@ lint-core:
 		tests/test_pinned_sources_are_tracked.py
 
 test-core:
-	python3 -m pytest -q tests/test_architecture_boundaries.py tests/test_assembly_ugi3.py \
+	python3 -m pytest -ra --junitxml=build/core-tests.xml tests/test_architecture_boundaries.py tests/test_assembly_ugi3.py \
 		tests/test_reaction_program.py tests/test_multireaction_corpus.py \
 		tests/test_multireaction_expansion.py \
 		tests/test_multireaction_mixed_expansion.py \

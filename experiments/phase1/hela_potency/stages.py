@@ -70,9 +70,6 @@ def fit_ugi_potency_adapter_crossfit(context: RunContext) -> StageResult:
         context.output_path("."),
         profile=context.profile,
         allocated_device=context.resources.device,
-        progress_dir=context.work_dir / "folds",
-        progress_commit=context.commit_progress,
-        resume=context.resume,
     )
     artifacts = [
         ProducedArtifact("result", "result.json", RESULT_SCHEMA),

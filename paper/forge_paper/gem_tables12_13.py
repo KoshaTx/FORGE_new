@@ -69,8 +69,7 @@ def render_gem_tables12_and_13(
         for row in _common_seed_rows(method, common[method])
     ]
     decomposition_rows = [
-        _common_decomposition_row(method, common[method])
-        for method in PAPER_COMMON_METHOD_ORDER
+        _common_decomposition_row(method, common[method]) for method in PAPER_COMMON_METHOD_ORDER
     ]
     if len(seed_rows) != len(PAPER_COMMON_METHOD_ORDER) * len(EXPECTED_SEEDS):
         raise GemTables12And13Error("seed-level row count changed")
@@ -83,7 +82,7 @@ def render_gem_tables12_and_13(
     _write_rows(seed_path, seed_rows)
     _write_rows(decomposition_path, decomposition_rows)
 
-    result = {
+    result: dict[str, Any] = {
         "schema_version": RESULT_SCHEMA,
         "status": "complete",
         "config": pin_record(config_path, repo),

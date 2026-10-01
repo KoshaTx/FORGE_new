@@ -32,6 +32,32 @@ or exception allowances are changed. Paper-specific availability is checked sepa
 `make review-check` and `python3 tools/review_submission.py --require-run-artifacts`; see
 [`paper/submission/ARTIFACTS.md`](../paper/submission/ARTIFACTS.md) for the missing paper inputs.
 
+The core tests use the public LNPDB CSV at the exact upstream commit and SHA-256 already recorded
+in `forge_data.vendor`. CI fetches and verifies it before testing. To fetch that input locally:
+
+```sh
+uv run --frozen python -m forge_data.fetch lnpdb_fc7c389.csv
+```
+
+The fetcher does not rewrite the vendor manifest, accept changed bytes, or replace a corrupt local
+copy. The full vendor command also requires historical workstation inputs; this selected download
+does not supply those inputs or the paper checkpoints.
+
+Tests that require unavailable historical receipts, ledgers or publisher supplements declare their
+exact paths with `requires_artifacts`. They report **SKIPPED**, with every missing path in the pytest
+summary, rather than counting as a reproduction pass. Present files still undergo the original
+assertions; corruption is not a reason to skip. Small synthetic unit tests separately exercise
+preflight rejection and missing-input behavior and never become scientific evidence. CI uploads the
+`core-test-results` JUnit report, including skips. For strict reproduction, fail on missing inputs:
+
+```sh
+uv run --frozen pytest --require-external-artifacts -ra tests/test_shared_synthesis_program_production_preflight.py
+```
+
+This option covers the explicitly declared external-artifact tests. The older unrecoverable-pin
+quarantine remains separately reported, and the strict paper-artifact verifier remains necessary
+for a paper reproduction claim.
+
 ## Choosing a test scope
 
 Use the smallest relevant check during development. The repository-wide suite includes complete

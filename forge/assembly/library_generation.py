@@ -48,7 +48,7 @@ def check_generated_program(
         raise LibraryAssemblyError("invalid repeated-program accumulator role")
     target, _ = constitutional_molecule(product_smiles)
     # Each frontier entry retains its full path, so convergent alternatives are not erased.
-    frontier = {(target, (), ())}
+    frontier: set[tuple[str, tuple[tuple[str, str], ...], tuple[str, ...]]] = {(target, (), ())}
     expansions = 0
     witnesses: dict[tuple[Any, ...], dict[str, Any]] = {}
     try:
@@ -90,6 +90,7 @@ def check_generated_program(
                         if len(witnesses) > limits.maximum_states:
                             return GeneratedProgramCheck("abstain", (), expansions, "witness_limit")
                     else:
+                        assert accumulator_role is not None  # Depth > 1 was validated above.
                         following.add((components[accumulator_role], reagents, path))
                         if len(following) > limits.maximum_states:
                             return GeneratedProgramCheck("abstain", (), expansions, "state_limit")

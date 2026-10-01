@@ -3,13 +3,18 @@
 from __future__ import annotations
 
 from collections import Counter
-from collections.abc import Mapping
+from collections.abc import Collection, Mapping
 
 from rdkit import Chem, rdBase
 
 from forge.assembly.families import LibraryAssemblyError, constitutional_molecule
 from forge.assembly.grouped_program import RegistryGroupedProgram
-from forge.assembly.program_atom_origins import SemanticReplay, _clear_labels, canonical_coordinates
+from forge.assembly.program_atom_origins import (
+    ProgramAtomOrigins,
+    SemanticReplay,
+    _clear_labels,
+    canonical_coordinates,
+)
 from forge.assembly.staged_program import _constraints
 
 
@@ -57,9 +62,10 @@ def trace_grouped_program(
         _constraints(smiles, spec["terminal_constraints"][role], bounds.maximum_outcomes)["pass"]
         for role, smiles in canonical.items()
     )
-    encode, decode = {}, {}
+    encode: dict[tuple[str, tuple[tuple[str, int], ...]], int] = {}
+    decode: dict[int, tuple[str, tuple[tuple[str, int], ...]]] = {}
 
-    def tag(role, core):
+    def tag(role: str, core: Mapping[str, int]) -> int:
         pair = (role, tuple(sorted(core.items())))
         if pair not in encode:
             index = len(encode) + 1
@@ -79,7 +85,13 @@ def trace_grouped_program(
     layers, transitions = [1], 0
     ambiguous_stage = False
 
-    def result(disposition, *, complete=False, annotations=None, products=()):
+    def result(
+        disposition: str,
+        *,
+        complete: bool = False,
+        annotations: ProgramAtomOrigins | None = None,
+        products: Collection[str] = (),
+    ) -> SemanticReplay:
         return SemanticReplay(
             disposition, complete, annotations, tuple(products), tuple(layers), transitions
         )
@@ -97,7 +109,7 @@ def trace_grouped_program(
         if set(adapter.roles) != {stage["accumulator_role"], *added}:
             raise LibraryAssemblyError("Grouped adapter roles differ from the source stage")
         for _ in range(stage["events"]):
-            following = {}
+            following: dict[str, Chem.Mol] = {}
             for _, state in sorted(current.items()):
                 reactants = tuple(
                     Chem.Mol(state if role == stage["accumulator_role"] else molecules[role])
@@ -184,23 +196,27 @@ def trace_grouped_program(
             ambiguous = True
         else:
             annotations.add(value)
-    products = tuple(sorted(products))
-    if len(products) != 1:
-        return result("ambiguous_forward_products", complete=True, products=products)
+    ordered_products = tuple(sorted(products))
+    if len(ordered_products) != 1:
+        return result("ambiguous_forward_products", complete=True, products=ordered_products)
     if ambiguous_stage:
-        return result("ambiguous_completed_source_stage", complete=True, products=products)
+        return result("ambiguous_completed_source_stage", complete=True, products=ordered_products)
     if ambiguous or len(annotations) != 1:
-        return result("ambiguous_forward_atom_coordinates", complete=True, products=products)
+        return result(
+            "ambiguous_forward_atom_coordinates", complete=True, products=ordered_products
+        )
     if (
         not terminal_pass
-        or not _constraints(products[0], spec["product_constraints"], bounds.maximum_outcomes)[
-            "pass"
-        ]
+        or not _constraints(
+            ordered_products[0], spec["product_constraints"], bounds.maximum_outcomes
+        )["pass"]
     ):
-        return result("outside_qualified_program_constraints", complete=True, products=products)
+        return result(
+            "outside_qualified_program_constraints", complete=True, products=ordered_products
+        )
     return result(
         "unique_forward_atom_coordinates",
         complete=True,
         annotations=next(iter(annotations)),
-        products=products,
+        products=ordered_products,
     )

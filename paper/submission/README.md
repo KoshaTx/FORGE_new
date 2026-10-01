@@ -45,7 +45,8 @@ older source provenance is not rewritten to claim a newer source identity.
 - Supply the exact submitted LaTeX export if editable manuscript reproduction is required.
 - Publish/access-enable the specific checkpoint archives and evaluation inputs listed in
   [ARTIFACTS.md](ARTIFACTS.md), with their recorded hashes and applicable data permissions.
-- Resolve the experimental-record discrepancies listed in [EVIDENCE.md](EVIDENCE.md#experimental-record).
+- Supply the remaining experimental details listed in [EVIDENCE.md](EVIDENCE.md#experimental-record).
+  The administration route is intramuscular, clarified by the user to match the submitted paper.
 - Choose the appropriate reviewer distribution. This is the existing organization repository with
   retained Git history; the PDF's anonymous author block does not make this repository anonymous.
 

@@ -873,6 +873,23 @@ def run_transformer_mechanism_study(
     checkpoint_paths = sorted(arm_work.glob("*/checkpoint_step_*.pt"))
     archive_path = training_dir / "checkpoints.tar"
     _deterministic_tar(checkpoint_paths, archive_path, base=arm_work)
+    if config["study"] == "shared_bias_end_to_end_retraining":
+        assert role_node_marginal is not None and role_bond_marginal is not None
+        source_marginals = {
+            "policy": "matched_global_and_smoothed_program_role_full_support",
+            "backoff_strength": float(config["source_backoff_strength"]),
+            "global": {"node": node_marginal.tolist(), "bond": bond_marginal.tolist()},
+            "program_role": {
+                "node": role_node_marginal.tolist(),
+                "bond": role_bond_marginal.tolist(),
+            },
+        }
+    else:
+        source_marginals = {
+            "policy": "shared_three_program_training_mixture_for_every_arm",
+            "node": node_marginal.tolist(),
+            "bond": bond_marginal.tolist(),
+        }
     training_result = {
         "schema_version": "forge.synthesis_program_production_training_result.v1",
         "status": "pass",
@@ -886,23 +903,7 @@ def run_transformer_mechanism_study(
         "cache": artifact_record(paths["production_cache"]),
         "model": base_model,
         "runtime": runtime,
-        "source_marginals": (
-            {
-                "policy": "matched_global_and_smoothed_program_role_full_support",
-                "backoff_strength": float(config["source_backoff_strength"]),
-                "global": {"node": node_marginal.tolist(), "bond": bond_marginal.tolist()},
-                "program_role": {
-                    "node": role_node_marginal.tolist(),
-                    "bond": role_bond_marginal.tolist(),
-                },
-            }
-            if config["study"] == "shared_bias_end_to_end_retraining"
-            else {
-                "policy": "shared_three_program_training_mixture_for_every_arm",
-                "node": node_marginal.tolist(),
-                "bond": bond_marginal.tolist(),
-            }
-        ),
+        "source_marginals": source_marginals,
         "arms": results,
         "checkpoint_archive": artifact_record(archive_path),
         "gates": {

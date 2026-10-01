@@ -455,7 +455,7 @@ def render_gem_prose_results(
         pin_record(novelty_path, repo),
         pin_record(guidance_path, repo),
     ]
-    result = {
+    result: dict[str, Any] = {
         "schema_version": RESULT_SCHEMA,
         "status": "complete",
         "config": pin_record(config_path, repo),

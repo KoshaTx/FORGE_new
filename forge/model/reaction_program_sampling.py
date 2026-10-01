@@ -457,6 +457,7 @@ def _terminal_graph(
         node_states[node] = state
         capacities[node] = _maximum_valence_units(atom_vocabulary[state])
     parents = np.zeros(count, dtype=np.int64)
+    assert BOND_VALENCE_UNITS is not None  # PyTorch availability was checked above.
     used = np.zeros(count, dtype=np.int64)
     edges = np.zeros((count, count), dtype=np.int64)
     for child in range(1, count):

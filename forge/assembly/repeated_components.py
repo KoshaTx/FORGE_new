@@ -8,8 +8,9 @@ Chemistry and role policies belong to the pinned registry, not this executor.
 from __future__ import annotations
 
 from collections import Counter
-from collections.abc import Mapping
+from collections.abc import Collection, Mapping, Sequence
 from dataclasses import dataclass
+from typing import Any
 
 from forge.assembly.families import (
     LibraryAssemblyError,
@@ -25,16 +26,16 @@ class RepeatBounds:
     maximum_states: int = 4096
     maximum_transitions: int = 16384
 
-    def __post_init__(self):
+    def __post_init__(self) -> None:
         for name, value in vars(self).items():
             if type(value) is not int or value < 1:
                 raise LibraryAssemblyError(f"{name} must be a positive integer")
 
 
-def element_inventory(smiles: str) -> Counter:
+def element_inventory(smiles: str) -> Counter[str]:
     """Include implicit/explicit hydrogen and net formal charge in the balance."""
     _, mol = constitutional_molecule(smiles)
-    counts = Counter()
+    counts: Counter[str] = Counter()
     for atom in mol.GetAtoms():
         counts[atom.GetSymbol()] += 1
         counts["H"] += atom.GetTotalNumHs()
@@ -51,7 +52,7 @@ def replay_repeated_components(
     events: int,
     byproducts_per_event: Mapping[str, int],
     bounds: RepeatBounds = RepeatBounds(),
-) -> dict:
+) -> dict[str, Any]:
     """Enumerate every forward site; condition reverse replay on declared side reagents.
 
     No target-directed forward pruning is permitted. Reaching any enumeration bound
@@ -76,7 +77,9 @@ def replay_repeated_components(
     reverse_layers = [[target]]
     reverse_edges: list[list[str | int]] = []
 
-    def over_budget(layers, edges):
+    def over_budget(
+        layers: Sequence[Collection[str]], edges: Sequence[Sequence[str | int]]
+    ) -> bool:
         return (
             sum(map(len, layers)) > bounds.maximum_states or len(edges) > bounds.maximum_transitions
         )
@@ -151,8 +154,8 @@ def replay_repeated_components(
         "forward_edges": forward_edges,
         "reverse_edges": reverse_edges,
         "balance": {
-            "reactants": dict(sorted(left.items())),
-            "product_and_byproducts": dict(sorted(right.items())),
+            "reactants": dict[str, Any](sorted(left.items())),
+            "product_and_byproducts": dict[str, Any](sorted(right.items())),
         },
         "inverse_scope": "conditioned_on_declared_fixed_side_components",
         "experimental_selectivity_qualified": False,

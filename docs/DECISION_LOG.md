@@ -24193,3 +24193,36 @@ and all 121 paper assets plus the stated conditioned-table arithmetic passed. Th
 against baseline `413767a3a12df3392ebb9492522bf8f2dab68085` found no evidence regressions. Broader
 locked Linux code checks remain to be qualified; this entry does not claim production readiness,
 historical reproduction or resolution of the manuscript/experimental-record discrepancy.
+
+## 2026-09-30 — Repair fresh-checkout checks and record the route clarification
+
+The independent Linux run exposed 125 assembly typing errors and 17 failing core test cases after
+the historical availability check no longer prevented their execution. Added concrete chemistry and
+collection types, explicit optional-value narrowing, and distinct accumulator names without changing
+the reaction rules, thresholds or sampling budgets. Further local checks identified a stage wrapper
+passing three unsupported restart keywords to the original potency-adapter crossfit function; its
+call now follows the actual signature, protected by an autospecced dispatch test that fits no model.
+The newer restart-capable potency wrappers retain their progress arguments.
+
+Recovered the public LNPDB input from its already-pinned upstream commit, verified SHA-256
+`3493f27306419facd0958589030ed37f272f05c81ad47dd7bc1b8ce0284a57b3`, and added a selected-asset
+fetch command for CI and reviewers. No substitute dataset or new vendor digest was introduced.
+Fixed gzip reading in a provenance test and temporary-directory creation in a fresh checkout.
+Historical receipt/supplement tests explicitly report missing artifact paths as skips, with a
+strict `--require-external-artifacts` mode; their original assertions remain. New synthetic tests
+exercise missing-input rejection and preflight gates without claiming historical evidence. CI
+publishes the test report so skipped checks remain visible.
+
+The user clarified the submitted experiment's administration route as **intramuscular**, matching
+the PDF. Recorded that attribution in `paper/submission/experimental_clarifications.json` and the
+reviewer guide. The old provisional intravenous record remains byte-identical; no independent
+laboratory verification or resolution of the other missing experimental details is claimed.
+
+Local validation before the next Linux run: 229 affected assembly tests passed; 21 portability/data/
+CI tests passed with one explicitly missing historical benchmark test skipped; 27 reviewer,
+evidence-regression and dispatch tests passed. Core lint and changed-file lint passed. Focused local
+typing passes the assembly and paper scopes; full Torch typing still requires the locked Linux
+environment. All 122 reviewer assets verify, while only 6 of 72 declared historical inputs are
+available. The baseline evidence comparison reports no new losses and historical availability
+INCOMPLETE. Archived exact pre-edit source/test versions before committing the fixes. These are
+engineering checks, not a full scientific reproduction or a production-readiness claim.

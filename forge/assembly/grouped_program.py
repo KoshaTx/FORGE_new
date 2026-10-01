@@ -11,6 +11,7 @@ import json
 from collections import Counter
 from dataclasses import dataclass
 from pathlib import Path
+from typing import Any
 
 from forge.assembly.families import (
     LibraryAssemblyError,
@@ -25,7 +26,7 @@ from forge.core.hashing import sha256_file
 
 @dataclass(frozen=True)
 class RegistryGroupedProgram:
-    specification: dict
+    specification: dict[str, Any]
     adapters: tuple[RegistryAssemblyAdapter, ...]
     bounds: RepeatBounds
 
@@ -137,8 +138,10 @@ class RegistryGroupedProgram:
             quantities.update({role: stage["events"] for role in stage["added_roles"]})
         return dict(sorted(quantities.items()))
 
-    def infer(self, product: str) -> dict:
-        states = {(constitutional_molecule(product)[0], ())}
+    def infer(self, product: str) -> dict[str, Any]:
+        states: set[tuple[str, tuple[tuple[str, str], ...]]] = {
+            (constitutional_molecule(product)[0], ())
+        }
         layers, searches, reasons = [1], [], []
         total_states, transitions = 1, 0
         for index in reversed(range(len(self.adapters))):
@@ -194,7 +197,7 @@ class RegistryGroupedProgram:
             "inverse_scope": "all_complete_tuples_with_one_repeated_identity_per_declared_stage_role",
         }
 
-    def replay(self, components: dict[str, str], product: str) -> dict:
+    def replay(self, components: dict[str, str], product: str) -> dict[str, Any]:
         if set(components) != set(self.roles):
             raise LibraryAssemblyError("grouped replay requires complete terminal roles")
         canonical = {role: constitutional_molecule(s)[0] for role, s in components.items()}
@@ -287,8 +290,8 @@ class RegistryGroupedProgram:
             "terminal_constraints": terminal_checks,
             "product_constraints": product_checks,
             "balance": {
-                "reactants": dict(sorted(left.items())),
-                "product_and_net_byproducts": dict(sorted(right.items())),
+                "reactants": dict[str, Any](sorted(left.items())),
+                "product_and_net_byproducts": dict[str, Any](sorted(right.items())),
             },
             "declared_quantities": self.quantities,
             "experimental_selectivity_qualified": False,

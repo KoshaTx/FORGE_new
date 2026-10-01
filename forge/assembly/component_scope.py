@@ -9,6 +9,7 @@ from __future__ import annotations
 import json
 from dataclasses import dataclass
 from pathlib import Path
+from typing import Any
 
 from rdkit import Chem
 
@@ -16,17 +17,19 @@ from forge.assembly.families import LibraryAssemblyError, constitutional_molecul
 from forge.core.hashing import sha256_file
 
 
-def _positive(value, name):
+def _positive(value: object, name: str) -> int:
     if type(value) is not int or value < 1:
         raise LibraryAssemblyError(f"{name} must be a positive integer")
     return value
 
 
-def _canonical(mol):
+def _canonical(mol: Chem.Mol) -> str:
     return Chem.MolToSmiles(mol, canonical=True, isomericSmiles=False)
 
 
-def _template_matches(canonical: str, atoms: int, specification: dict) -> list[dict]:
+def _template_matches(
+    canonical: str, atoms: int, specification: dict[str, Any]
+) -> list[dict[str, Any]]:
     """Every candidate is a complete graph, never a substructure acceptance test."""
     found = []
     for index, template in enumerate(specification["templates"]):
@@ -44,7 +47,7 @@ def _template_matches(canonical: str, atoms: int, specification: dict) -> list[d
     return found
 
 
-def _validate_template(spec):
+def _validate_template(spec: dict[str, Any]) -> None:
     expected = {"templates", "repeat_smiles", "minimum_repeats"}
     if set(spec) not in (expected, expected | {"repeat_counts"}):
         raise LibraryAssemblyError("Complete template scope fields changed")
@@ -66,7 +69,7 @@ def _validate_template(spec):
     _template_matches("", spec["minimum_repeats"], spec)
 
 
-def _body_ok(mol, spec):
+def _body_ok(mol: Chem.Mol, spec: dict[str, Any]) -> bool:
     atoms = list(mol.GetAtoms())
     roots = [a for a in atoms if a.GetAtomicNum() == 0]
     if len(roots) != 1 or roots[0].GetDegree() != 1:
@@ -100,10 +103,10 @@ def _body_ok(mol, spec):
 
 @dataclass(frozen=True)
 class RegistryComponentScopes:
-    specifications: dict
+    specifications: dict[str, Any]
     maximum_matches: int = 1024
 
-    def __post_init__(self):
+    def __post_init__(self) -> None:
         _positive(self.maximum_matches, "maximum_matches")
         if not isinstance(self.specifications, dict) or not self.specifications:
             raise LibraryAssemblyError("Missing complete-component scopes")
@@ -181,12 +184,14 @@ class RegistryComponentScopes:
                 raise LibraryAssemblyError(f"Unknown complete-component scope: {name}")
 
     @classmethod
-    def from_registry(cls, path: Path, *, expected_sha256: str, maximum_matches=1024):
+    def from_registry(
+        cls, path: Path, *, expected_sha256: str, maximum_matches: int = 1024
+    ) -> RegistryComponentScopes:
         if sha256_file(path) != expected_sha256:
             raise LibraryAssemblyError("Complete-component registry checksum differs")
         return cls(json.loads(path.read_text())["component_scopes"], maximum_matches)
 
-    def assess(self, scope_id: str, smiles: str) -> dict:
+    def assess(self, scope_id: str, smiles: str) -> dict[str, Any]:
         if scope_id not in self.specifications:
             raise LibraryAssemblyError(f"Unknown complete-component scope: {scope_id}")
         canonical, mol = constitutional_molecule(smiles)
@@ -232,7 +237,8 @@ class RegistryComponentScopes:
                         atom.SetIsotope(0)
                         atom.SetAtomMapNum(1)
                 fragments = Chem.GetMolFrags(cut, asMols=True, sanitizeFrags=True)
-                central, bodies = [], []
+                central: list[Chem.Mol] = []
+                bodies: list[Chem.Mol] = []
                 anchor = match[maps[spec["central_anchor_map"]]]
                 for fragment in fragments:
                     indices = {
