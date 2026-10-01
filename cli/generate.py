@@ -14,7 +14,7 @@ from typing import Any
 from forge.core.hashing import is_sha256, sha256_file, sha256_json
 
 ROOT = Path(__file__).resolve().parents[1]
-MANIFEST = Path("paper/submission/manifest.json")
+MANIFEST = Path("paper/submission/checkpoints.json")
 ARM = "shared_bias_program_role_source"
 STEP = 9143
 FLOW_STEPS = 32
@@ -64,7 +64,7 @@ def check_inputs(
     ):
         raise ValueError("paper sampling settings changed in the evaluation configuration")
     manifest = _read_object(root / MANIFEST)
-    pins = {row["path"]: row["sha256"] for row in manifest["historical_inputs"]}
+    pins = {row["path"]: row["sha256"] for row in manifest["inputs"]}
     bundle = f"results/phase1/shared_bias_parallel_program_role_seed{replicate}_v2"
     declared = dict(config["inputs"])
     for name, filename in (
@@ -109,7 +109,7 @@ def check_inputs(
         "terminal_decode_policy": DECODER,
         "inputs": records,
         "configuration_sha256": str(sha256_file(config_path)),
-        "submission_manifest_sha256": str(sha256_file(root / MANIFEST)),
+        "checkpoint_manifest_sha256": str(sha256_file(root / MANIFEST)),
         "scope": "input identity only; no generation or paper reproduction performed",
     }
 

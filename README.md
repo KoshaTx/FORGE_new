@@ -2,7 +2,7 @@
 
 **Reaction-Guided Generative Design of Ionizable Lipids**
 
-[Paper](paper/submission/FORGE.pdf) · [Reviewer guide](paper/submission/README.md) ·
+[Paper](paper/submission/FORGE.pdf) · [Paper guide](paper/submission/README.md) ·
 [Paper → code and results](paper/submission/EVIDENCE.md) ·
 [Data and checkpoints](paper/submission/ARTIFACTS.md) ·
 [Generation quickstart](paper/submission/QUICKSTART.md) · [Examples](examples/README.md)
@@ -14,10 +14,8 @@ it does not supply component identifiers, stored precursor graphs or fragment to
 Generated molecules are decomposed into implied precursors and checked by exact forward replay.
 Bounded upstream route assessment returns a computational dossier or an explicit unresolved outcome.
 
-This branch documents the supplied **39-page manuscript**, pinned in
-[`paper/submission/manifest.json`](paper/submission/manifest.json). Its experiments use the
-historical **shared three-family model**: Ugi 3-CR, repeated aza-Michael addition and repeated
-reductive amination. The separate 22-family study is indexed under [other studies](docs/STUDIES.md).
+The supplied **39-page manuscript** uses the **shared three-family model**: Ugi 3-CR, repeated
+aza-Michael addition and repeated reductive amination. The separate 22-family study is indexed under [other studies](docs/STUDIES.md).
 
 ## Results in the paper
 
@@ -41,52 +39,36 @@ reported values, without replicate-level uncertainty or significance tests; see 
 [experimental record and remaining questions](paper/submission/EVIDENCE.md#experimental-record).
 Exact assembly replay alone does not demonstrate synthesis success or delivery performance.
 
-## Start here: no GPU or model downloads
-
-From the repository root with Python 3.10+:
-
-```bash
-make review-check
-```
-
-This offline check verifies the submitted PDF and indexed evidence files, recomputes the
-conditioned Table 1 means/SDs from Table 4's seed counts, and lists unavailable historical inputs.
-It **does not rerun training or inference**. The JSON report includes expected paths and hashes:
-
-```bash
-python3 tools/review_submission.py --json > /tmp/forge-review-report.json
-```
-
-**Full numerical reproduction is not available from this checkout alone.** The historical
-production checkpoint archives and some evaluation ledgers are absent. The paper also records
-missing historical source/environment information. [Artifact access and exact limitations](paper/submission/ARTIFACTS.md)
-are separate from the checks that run locally. Small smoke checkpoints elsewhere in the tree are
-not the paper's production model.
-
-## Code and development
+## Install and generate
 
 ```bash
 uv sync --frozen --extra dev --extra torch
-uv run --frozen forge --help
-uv run --frozen make test-one TEST=tests/test_review_submission.py
-```
-
-Installing dependencies requires network access. Training, sampling and data preparation have
-additional hash-pinned inputs; follow the [artifact guide](paper/submission/ARTIFACTS.md) before
-running them. `make vendor` includes paths on the original workstation and cannot populate all
-inputs from public downloads alone. The [test guide](docs/TESTING.md) explains how to fetch the
-already-pinned public LNPDB input and how unavailable historical tests are reported. The current
-lockfile is a development environment, not a recovered historical training environment.
-
-The [generation quickstart](paper/submission/QUICKSTART.md) provides a bounded three-family
-sampling command and an input-only check:
-
-```sh
 uv run --frozen python -m cli.generate --check-inputs
 ```
 
-It reports missing paper checkpoints/companion records before loading any model. The wrapper is
-tested with fixtures and a separate small smoke model; paper-checkpoint generation remains pending.
+The paper checkpoint bundle is not distributed yet. The input check reports missing files
+before loading a model. Once the bundle is available:
+
+```bash
+uv run --frozen python -m cli.generate \
+  --family ugi --count 4 --seed 42 --device cpu --output build/generation/ugi-seed42
+```
+
+See the [quickstart](paper/submission/QUICKSTART.md) for checkpoint placement, reaction families
+and output formats, and [examples](examples/README.md) for existing molecular illustrations.
+The CLI is tested with separate small smoke weights; generation with the paper checkpoint and
+full reproduction of the reported results remain unverified.
+
+## Development
+
+```bash
+uv run --frozen pytest -q tests/test_reviewer_generation.py
+```
+
+CI runs typing, lint, core tests and study-interface checks. The [test guide](docs/TESTING.md)
+explains test scopes and external inputs. Some historical tests require data that is not
+included in this checkout and explicitly report that absence. See [data and checkpoints](paper/submission/ARTIFACTS.md)
+for availability and the difference between generation and numerical reproduction.
 
 | Directory | Purpose |
 |---|---|
@@ -94,7 +76,7 @@ tested with fixtures and a separate small smoke model; paper-checkpoint generati
 | [`forge/assembly/`](forge/assembly) | Reaction adapters, decomposition and exact replay |
 | [`forge/synthesis/`](forge/synthesis) | Bounded precursor route assessment and evidence |
 | [`experiments/`](experiments) and [`configs/`](configs) | Versioned study workflows and contracts |
-| [`paper/submission/`](paper/submission) | Submitted PDF, reviewer guide and evidence manifest |
+| [`paper/submission/`](paper/submission) | Submitted PDF, generation instructions and paper-to-code map |
 | [`paper/v1_iclr/`](paper/v1_iclr) | Related earlier manuscript sources and supporting tables/figures |
 | [`tests/`](tests) | Scientific and software contract checks; some require external artifacts |
 | [`docs/`](docs), [`results/`](results), [`provenance/`](provenance) | Research history, retained results and immutable source records |

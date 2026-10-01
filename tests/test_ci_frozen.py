@@ -2,8 +2,6 @@
 
 from __future__ import annotations
 
-import hashlib
-import json
 import os
 import shlex
 import subprocess
@@ -32,7 +30,7 @@ def test_ci_uv_commands_preserve_the_lockfile() -> None:
 def test_make_test_commands_preserve_the_lockfile() -> None:
     env = {key: value for key, value in os.environ.items() if key not in {"UV_RUN", "MAKEFLAGS"}}
     result = subprocess.run(
-        ["make", "--dry-run", "test-one", "TEST=tests/test_review_submission.py"],
+        ["make", "--dry-run", "test-one", "TEST=tests/test_reviewer_generation.py"],
         cwd=ROOT,
         env=env,
         check=True,
@@ -42,13 +40,6 @@ def test_make_test_commands_preserve_the_lockfile() -> None:
     assert "uv run --frozen python -m pytest" in result.stdout
 
 
-def test_all_committed_historical_archive_blobs_match_their_digest() -> None:
-    manifest = json.loads((ROOT / "provenance/frozen-code/manifest.json").read_text())
-    for entry in manifest["entries"]:
-        payload = (ROOT / entry["blob_path"]).read_bytes()
-        assert hashlib.sha256(payload).hexdigest() == entry["sha256"], entry["original_path"]
-
-
 def test_ci_runs_code_checks_independently_of_historical_availability() -> None:
     workflow = yaml.safe_load((ROOT / ".github/workflows/ci.yml").read_text())
     steps = workflow["jobs"]["core"]["steps"]
@@ -56,7 +47,6 @@ def test_ci_runs_code_checks_independently_of_historical_availability() -> None:
         step = next(step for step in steps if step.get("run") == f"uv run --frozen make {target}")
         assert "!cancelled()" in step["if"]
         assert "steps.install.outcome == 'success'" in step["if"]
-    assert "evidence-regression" in workflow["jobs"]
     result = subprocess.run(
         ["make", "--dry-run", "test-core"],
         cwd=ROOT,

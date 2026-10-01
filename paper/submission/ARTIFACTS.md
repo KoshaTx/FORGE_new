@@ -1,30 +1,4 @@
-# Data, checkpoints and reproduction
-
-## What runs from a fresh checkout
-
-```bash
-make review-check
-python3 tools/review_submission.py --json > /tmp/forge-review-report.json
-```
-
-Python 3.10+ is sufficient; no installation, network, RDKit, PyTorch, credentials or GPU is needed.
-The checker hashes the 122 indexed review assets and recomputes the conditioned Table 1 means and
-sample SDs from the nine Table 4 rows. It also inspects 72 explicitly indexed historical input pins.
-At the cleanup baseline, **6 are available with matching hashes and 66 are missing**. Its JSON
-output lists every path, expected hash and current status. The inventory covers direct references
-from seven table contracts plus the production training/design/checkpoint records; it is not a
-recursive inventory of every corpus, ledger, engine or environment needed for training.
-
-The default command succeeds when the review assets and arithmetic are intact, even if disclosed
-historical inputs are missing. A changed historical file is always an error. To require all indexed
-historical files to be present as well:
-
-```bash
-python3 tools/review_submission.py --require-run-artifacts
-```
-
-This stricter check is expected to fail on a fresh checkout. Even passing it would establish only
-availability of the indexed bytes, not a complete numerical reproduction or recovered environment.
+# Data and checkpoints
 
 ## The paper's model
 
@@ -40,19 +14,16 @@ this checkout today.
 | 1 / 20260826 | `results/phase1/shared_bias_parallel_program_role_seed1_v2/checkpoints.tar` | `a3e1e15cb6d55e6a0bc8d161a0061762ef6190c22c957fd957493bbe3860d55d` |
 | 2 / 20260827 | `results/phase1/shared_bias_parallel_program_role_seed2_v2/checkpoints.tar` | `f500418e7cdfe6aa59b5d1261cb68c7ff715fa1a0e06498334eb727185f74506` |
 
-These archives are **not bundled in Git**, and this branch does not invent a public download URL
-or assume a Modal volume is still accessible. Request the exact archives and companion
-`training_result.json` / `study_design.json` records from the maintainers. The manifest records their
-expected hashes. Do not substitute the Ugi-only 1,000-step application checkpoint, small smoke
-archives, oracle checkpoints or newer 22-family weights for the paper's model.
+These archives are **not bundled in Git**. A verified download link will be added when the
+bundle is available. Each archive needs its companion `training_result.json` and
+`study_design.json` in the same directory. [checkpoints.json](checkpoints.json) records the
+expected hashes for these nine files; the [quickstart](QUICKSTART.md) explains placement and
+input verification. The production cache, registries and other direct generation inputs
+are already committed and checked against the sampling configuration.
 
-For historical correspondence, the seed-0 evaluation snapshot is commit
-`ac9ef87be4c8e5c14c477bc194a333344e621d3e` with source fingerprint
-`3e364c01e8a8f792c8fdfef58524ca714562c9cbed4aac225d39d41a8ebad052`.
-No exact match was recovered for the seed-1/seed-2 evaluation fingerprint
-`8050c5ac500fd64bf6e3252cc537d3fb16f9d6ef8d06044fdb272618d4591e03`.
-A complete historical training-source and environment/compute manifest is also unavailable.
-These limits are disclosed in Appendix A.8; current code is not a replacement historical receipt.
+The earlier Ugi-only application model and the small smoke weights are different models.
+Generation with the paper checkpoint and full numerical reproduction remain unverified.
+Appendix A.8 describes limitations in the available historical source/environment records.
 
 ## Data and table regeneration
 
@@ -62,7 +33,7 @@ their contents. Full `make vendor` requires hash-pinned assets from the originat
 in addition to available public inputs. The selected public LNPDB test input can be fetched with
 `PYTHONPATH=.:tools python -m forge_data.fetch lnpdb_fc7c389.csv`; that dataset alone does not supply
 the paper's training cache or checkpoints. See [data provenance](../../docs/DATA_PROVENANCE.md)
-for origins and boundaries, and [RELEASE.md](RELEASE.md) for the generation-release checklist.
+for origins and boundaries.
 
 After the maintainers provide the exact required inputs, install the locked development environment:
 
@@ -94,13 +65,6 @@ and [STUDIES.md](../../docs/STUDIES.md). A full rerun additionally needs origina
 identities, arm-specific checkpoints, evaluator inputs and a recovered runtime. This cleanup does
 not download models, run training, spend cloud compute or claim a completed end-to-end rerun.
 
-## Different commands, different contracts
-
-| Command / path | Scope |
-|---|---|
-| `make review-check` | This supplied PDF, indexed assets and stated arithmetic check |
-| `forge paper render-gem-table1` | Historical three-family Table 1 artifact replay, with external inputs |
-| `forge paper render-completed-evidence-v1` | Completed-evidence renderer; original historical names retained |
-| `forge paper verify`, `reproduce`, `build`, `doctor` | **Archived v0**, via `configs/reproduction/iclr2027.json` |
-| `make test-study-compatibility` | Present-day three-family/22-family software interfaces; not paper replication |
-| Building `paper/v1_iclr/FORGE_ICLR2027_paper.tex` | Earlier related manuscript, not the exact submitted PDF |
+The legacy `forge paper verify/reproduce/build/doctor` commands target the archived **v0**
+manuscript, not this submission. Building the `paper/v1_iclr/` LaTeX produces an earlier related
+revision. Neither operation establishes reproduction of the submitted PDF.

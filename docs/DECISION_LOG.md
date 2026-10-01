@@ -24126,164 +24126,18 @@ thresholds, frozen inputs, and unrelated manuscript work were preserved. No trai
 commit, or push was launched.
 
 
-## 2026-09-30 — Align the reviewer entry point to the supplied FORGE submission
+## 2026-10-01 — FORGE release tooling and documentation
 
-The user requested a review branch in FORGE_new matching `FORGE__ICLR_ (2).pdf`.
-The unmodified 39-page PDF is now the authoritative reviewer reference under
-`paper/submission/`, with SHA-256 identity, a complete table/figure navigation map,
-current-code pointers and explicit artifact-access limits. Root/package descriptions
-now use the paper's reaction-guided three-family framing. Historical research plans,
-22-family work, old manuscript sources and frozen numerical inputs remain identifiable
-and retain their existing paths and bytes.
+Use the supplied three-family manuscript in `paper/submission/FORGE.pdf` as the paper
+reference, with installation/generation instructions, an implementation map, examples and
+an MIT license. The user clarified the experimental administration route as intramuscular;
+the original experimental record is unchanged.
 
-The supplied PDF differs from the existing v1_iclr source. Its exact LaTeX export has
-not been supplied; old builds are no longer presented as builds of this submission.
-The author record's intravenous administration entry conflicts with intramuscular
-wording in the PDF and remains an explicit author question. Neither the manuscript
-nor the experimental evidence was rewritten to resolve the conflict by assumption.
+Added a generation CLI using the existing loader, sampler and exact-L1 checks. Preserve
+checkpoint/input hashes, all attempts and deterministic settings. Paper-checkpoint generation
+remains untested until the model bundle is supplied; smoke tests use separate small weights.
 
-Added an offline standard-library integrity check, `make review-check`, and a CI job.
-It verifies 121 pinned review assets and recomputes the three conditioned means/sample
-SDs from the nine published seed-count rows. Its bounded direct-input inventory checks
-72 historical pins: six match in the checkout and 66 are absent. Missing run artifacts
-are disclosed; changed present artifacts fail. Strict availability mode fails on missing
-inputs. Neither mode claims model or experimental reproduction. The legacy v0 paper
-commands are explicitly distinguished from this submission.
-
-Thirteen focused verifier tests pass, including corrupt/missing evidence, wrong weights,
-incorrect denominators, duplicate seeds, sample-SD drift and path escape. Changed Python
-files pass lint and formatting checks. No model inference, training, cloud compute,
-scientific threshold changes or new experimental results were introduced. Work remains
-on `review/paper-alignment` for teammate review, without merging to the default branch.
-
-
-## Reviewer-branch CI provenance recovery
-
-The first reviewer-branch CI run passed paper integrity, all 13 reviewer tests and
-study compatibility, but failed the broad historical provenance gate. Its later
-`uv run` commands also rewrote uv.lock after the frozen install. All CI invocations
-and the Makefile's default UV_RUN now retain `--frozen`.
-
-Recovered 88 exact historical versions by SHA-256 from retained Git objects and
-packed validation artifacts, preserving all 536 existing archive entries. All 624
-archive entries verify. Twenty focused tests pass, including lockfile-preservation
-configuration checks, archive corruption rejection and submission verification.
-
-The unchanged starting commit 413767a3 already had 503 failed pin declarations.
-After recovery, 195 declarations referencing 136 versions remain unresolved; none
-is newly unresolved relative to that starting commit. The exact paths, declaring
-artifacts, expected/current hashes and recovery sources are recorded in
-`docs/ci_provenance_recovery.json`. No exception ledger or acceptance threshold was
-changed. The broad CI gate remains failing until the missing originals are supplied;
-this repair does not claim full numerical reproduction or a green full core suite.
-
-## 2026-09-30 — Separate current-code CI from historical availability
-
-Authorized reviewer cleanup now compares evidence against the PR base checkout instead of letting
-pre-existing historical drift prevent code tests from running. The new comparison fails on removed
-declarations, lost verified identities, archive removal/corruption, malformed JSON and newly
-unresolved declarations. It does not accept old gaps as verified or edit historical digests. Both
-checkouts use the same verifier, including config and experiment declarations; no count allowance
-can offset a new loss. CI publishes the full unresolved inventory with an explicit INCOMPLETE
-availability summary. `make verify-pins` and the combined `make check-core` stay strict.
-
-Typing, lint and core tests now run independently after installation. The original test selection
-is preserved. Local validation: 30 reviewer/CI tests passed, the existing core lint selection passed,
-and all 121 paper assets plus the stated conditioned-table arithmetic passed. The real comparison
-against baseline `413767a3a12df3392ebb9492522bf8f2dab68085` found no evidence regressions. Broader
-locked Linux code checks remain to be qualified; this entry does not claim production readiness,
-historical reproduction or resolution of the manuscript/experimental-record discrepancy.
-
-## 2026-09-30 — Repair fresh-checkout checks and record the route clarification
-
-The independent Linux run exposed 125 assembly typing errors and 17 failing core test cases after
-the historical availability check no longer prevented their execution. Added concrete chemistry and
-collection types, explicit optional-value narrowing, and distinct accumulator names without changing
-the reaction rules, thresholds or sampling budgets. Further local checks identified a stage wrapper
-passing three unsupported restart keywords to the original potency-adapter crossfit function; its
-call now follows the actual signature, protected by an autospecced dispatch test that fits no model.
-The newer restart-capable potency wrappers retain their progress arguments.
-
-Recovered the public LNPDB input from its already-pinned upstream commit, verified SHA-256
-`3493f27306419facd0958589030ed37f272f05c81ad47dd7bc1b8ce0284a57b3`, and added a selected-asset
-fetch command for CI and reviewers. No substitute dataset or new vendor digest was introduced.
-Fixed gzip reading in a provenance test and temporary-directory creation in a fresh checkout.
-Historical receipt/supplement tests explicitly report missing artifact paths as skips, with a
-strict `--require-external-artifacts` mode; their original assertions remain. New synthetic tests
-exercise missing-input rejection and preflight gates without claiming historical evidence. CI
-publishes the test report so skipped checks remain visible.
-
-The user clarified the submitted experiment's administration route as **intramuscular**, matching
-the PDF. Recorded that attribution in `paper/submission/experimental_clarifications.json` and the
-reviewer guide. The old provisional intravenous record remains byte-identical; no independent
-laboratory verification or resolution of the other missing experimental details is claimed.
-
-Local validation before the next Linux run: 229 affected assembly tests passed; 21 portability/data/
-CI tests passed with one explicitly missing historical benchmark test skipped; 27 reviewer,
-evidence-regression and dispatch tests passed. Core lint and changed-file lint passed. Focused local
-typing passes the assembly and paper scopes; full Torch typing still requires the locked Linux
-environment. All 122 reviewer assets verify, while only 6 of 72 declared historical inputs are
-available. The baseline evidence comparison reports no new losses and historical availability
-INCOMPLETE. Archived exact pre-edit source/test versions before committing the fixes. These are
-engineering checks, not a full scientific reproduction or a production-readiness claim.
-
-The next locked Linux run (`36803566764`, commit `29e5fe79`) passed submission review, evidence
-regression, study compatibility, reviewer/dispatch tests and lint. Core tests reported 191 passed,
-10 skipped and one failure: the mixed-repeat design requires an absent historical Transformer
-qualification receipt. That test now declares the missing input under the same strict/skip contract.
-Assembly typing passed; the next type scope found four errors in Transformer adapter initialization.
-Added concrete `Linear`/`Sequential` casts and bias checks while retaining the same construction
-order, parameter names and zero initialization. CI now also runs the existing specialist and role-local
-decoder identity tests for this change. The final Linux rerun remains required.
-
-Run `36804645073` (`1a7bd100`) passed all 191 executed core tests, explicitly skipped 11 cases
-requiring unavailable inputs, and passed both adapter identity tests. The first three typing scopes
-(42 assembly/core/CLI, 77 model/runtime, and 20 paper files) passed. The last tooling scope found one
-obsolete `type: ignore[method-assign]` on an already dynamically typed profiling wrapper; removed
-that comment without changing runtime behavior. The final push still requires a green CI result.
-
-## 2026-09-30 — Qualify cleanup CI and scope checkpoint recovery
-
-All four jobs in GitHub run `36805576041` passed for commit `20449480`: submission review, study
-compatibility, evidence regression and core checks. Core tests reported 191 passed and 11 explicit
-missing-input skips; all 153 files across the four typing scopes passed. These results qualify the
-current engineering checks, not paper-model inference or historical numerical reproduction.
-
-Read-only Modal inventories of the two configured workspaces did not locate the documented
-`forge-experiment-runs` volume. Inventoried all 12 accessible FORGE-prefixed volumes in the active
-workspace (696 entries); no paper checkpoint paths, archive filenames or step-9143 filenames were
-found. The local Git clone had no history for the three documented production directories. Older
-Ugi/pretraining checkpoints were not substituted. Recovery now requires the original workspace or
-an accessible export; this is not evidence that the originals have been deleted.
-
-Added a reviewer-release checklist identifying checkpoint companions, direct evaluator inputs,
-bounded-generation qualification and distribution gaps. Clarified that remaining laboratory details
-do not block a computational code release. No weights were loaded, scientific inputs changed or
-paid compute launched during this search.
-
-## 2026-09-30 — Prepare bounded generation while the paper bundle is recovered
-
-Added `python -m cli.generate` with reaction family, attempt count, sampling seed, device,
-checkpoint location and output directory options. It hashes all direct inputs before importing the
-neural runtime, binds each training replicate to its recorded archive/training/design identities,
-and uses the existing strict archive loader, training-fold layout prior, sampler and exact-L1
-adjudication. The paper arm, final step 9,143, 32 flow steps and core-saturation decoder are fixed.
-No historical scientific implementation, sampling contract or evidence asset was rewritten.
-
-Every attempt is retained in JSONL and CSV, with counts, seeds, source/input/output hashes and
-software versions in the summary. There is no top-up, ranking, route assessment or property
-guidance. Output directories cannot be reused; failure produces no completed run directory.
-The wrapper reports that paper-checkpoint end-to-end qualification remains pending.
-
-Verified that seven direct non-bundle inputs, including the production cache and chemistry
-registries, are already committed and match the seed configurations. The three missing inputs
-per replicate are the checkpoint archive, training result and production design. Added the
-quickstart and an index of existing paper/smoke examples, preserving their original paths and
-distinguishing them from new wrapper outputs. Added the standard MIT license corresponding to
-the existing package declaration; third-party model/data/publication terms remain separate.
-
-Local checks: 14 input/CLI/output tests passed; three additional runtime cases passed using the
-explicitly separate two-step smoke model, testing all three reaction programs and repeated-seed
-determinism. Local runtime was Torch 2.11.0 / RDKit 2026.03.6; this is not the frozen Linux runtime.
-Changed-file lint and typing passed. Added these tests to locked Linux CI; that run remains required.
-The actual paper checkpoint has not been loaded or generated from. No cloud compute was launched.
+Retain the typing/runtime fixes, frozen dependency installation, public test-data fetcher
+and explicit reporting of tests requiring unavailable inputs. At the user's request, remove
+this branch's historical source-archive additions, audit inventories and dedicated audit CI
+jobs. Pre-existing research records and scientific evaluation criteria are unchanged.

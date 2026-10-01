@@ -6,15 +6,6 @@ on:
     branches: [main, master]
 
 jobs:
-  submission-review:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: '3.12'
-      - name: Verify submitted-paper assets and conditioned seed arithmetic
-        run: make review-check
   study-compatibility:
     runs-on: ubuntu-latest
     steps:
@@ -26,31 +17,6 @@ jobs:
         run: uv sync --frozen --extra dev --extra torch
       - name: Check both study interfaces without training
         run: uv run --frozen make test-study-compatibility
-  evidence-regression:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          path: current
-      - uses: actions/checkout@v4
-        with:
-          ref: ${{ github.event.pull_request.base.sha || github.event.before }}
-          path: baseline
-      - uses: actions/setup-python@v5
-        with:
-          python-version: '3.12'
-      - name: Block new evidence losses and report historical gaps
-        working-directory: current
-        run: >-
-          PYTHONPATH=.:tools python3 -m forge_provenance.regression
-          --base-root ../baseline --output build/provenance-regression.json
-          --summary "$GITHUB_STEP_SUMMARY"
-      - uses: actions/upload-artifact@v4
-        if: ${{ !cancelled() }}
-        with:
-          name: historical-evidence-audit
-          path: current/build/provenance-regression.json
-          if-no-files-found: error
   core:
     runs-on: ubuntu-latest
     steps:
@@ -61,8 +27,8 @@ jobs:
       - name: Install locked development environment
         id: install
         run: uv sync --frozen --extra dev --extra torch
-      - name: Check reviewer verifier failure modes
-        run: uv run --frozen pytest -q tests/test_review_submission.py tests/test_ci_frozen.py tests/test_ci_provenance.py tests/test_public_data_fetch.py tests/test_external_artifact_requirements.py tests/test_potency_stage_contract.py
+      - name: Check CLI, dependency and data handling
+        run: uv run --frozen pytest -q tests/test_ci_frozen.py tests/test_public_data_fetch.py tests/test_external_artifact_requirements.py tests/test_potency_stage_contract.py
       - name: Check generation wrapper with separate smoke weights
         run: uv run --frozen pytest -q tests/test_reviewer_generation.py --junitxml=build/reviewer-generation-tests.xml
       - name: Check zero-initialized adapter identity

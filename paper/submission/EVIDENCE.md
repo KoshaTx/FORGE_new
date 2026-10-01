@@ -2,8 +2,8 @@
 
 Numbering refers to the [submitted PDF](FORGE.pdf), not older GEM/ICLR drafts. Historical filenames
 retain their original names: a renderer named `gem_table7` need not produce Table 7 in this PDF.
-`manifest.json` pins the reviewer assets; `make review-check` checks those bytes. The map below
-separates computed results, author-reported experiments and idealized mathematical statements.
+The map below separates computed results, author-reported experiments and idealized
+mathematical statements. It is a navigation guide, not a verification of historical runs.
 
 ## Method map
 

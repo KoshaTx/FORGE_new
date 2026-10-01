@@ -7,7 +7,7 @@ not substitute the earlier Ugi model used by Vessel or the tiny smoke models in 
 
 ## Install
 
-From a checkout of the reviewer branch, use the locked development environment:
+From a checkout of this repository, use the locked development environment:
 
 ```sh
 uv sync --frozen --extra dev --extra torch
@@ -40,7 +40,7 @@ results/phase1/shared_bias_parallel_program_role_seed0_v2/
   study_design.json
 ```
 
-Use the exact hashes in [ARTIFACTS.md](ARTIFACTS.md) and [manifest.json](manifest.json). Download
+Use the exact hashes in [ARTIFACTS.md](ARTIFACTS.md) and [checkpoints.json](checkpoints.json). Download
 links will be added when the original bundle is recovered. There is no working download command yet.
 Keep the archive intact; the loader reads the authenticated member without extracting files.
 

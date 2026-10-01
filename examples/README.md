@@ -14,9 +14,6 @@ Frozen files remain in their original locations so their paper/provenance refere
   and [conditioned/null/cyclic comparison](../paper/v1_iclr/generated/shared_program_figure_rows.tex).
   These are retained results, not freshly recomputed model measurements.
 
-The [submission manifest](../paper/submission/manifest.json) pins the paper assets. Run
-`make review-check` to verify their identity and the documented conditioned-table arithmetic.
-
 ## Engineering smoke example
 
 [`shared_synthesis_program_production_smoke_v1/`](../results/phase1/shared_synthesis_program_production_smoke_v1/)

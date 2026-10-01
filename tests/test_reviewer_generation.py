@@ -38,7 +38,7 @@ def bundle(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> Path:
         relative = f"{base}/{name}"
         _write(root / relative, {"fixture": name})
         pins.append({"path": relative, "sha256": str(sha256_file(root / relative))})
-    _write(root / command.MANIFEST, {"historical_inputs": pins})
+    _write(root / command.MANIFEST, {"inputs": pins})
     _write(
         root
         / "configs/multireaction/shared_bias_parallel_program_role_seed0_core_saturation_v2.json",
