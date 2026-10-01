@@ -4,6 +4,10 @@ The source and offline paper checks are available now. Generation with the paper
 is still blocked by unavailable weights and companion inputs. A source release can disclose that
 limitation; a release advertised as runnable pretrained generation must resolve it first.
 
+The [generation wrapper and quickstart](QUICKSTART.md), input hash checks and
+[existing examples](../../examples/README.md) are now provided. The wrapper is tested with separate
+fixtures/smoke weights; qualification with the actual paper bundle remains pending.
+
 ## Recover the model bundle
 
 Start with seed 0 for a bounded generation example. Recover all three seeds for the paper's
@@ -12,6 +16,8 @@ For each seed, obtain the matching `checkpoints.tar`, `training_result.json` and
 their expected identities are recorded in [manifest.json](manifest.json). Preserve the original
 files and verify their hashes before loading weights.
 
+The cache, registries, assignments and splits below are already committed and hash-verified.
+The missing bundle consists of the checkpoint archive, training result and production design.
 Weights alone are insufficient for the current sampler. It constructs its vocabulary and
 training-fold count prior from the production cache. The existing evaluation entry point also
 requires chemistry registries, assignments and splits. Recover the direct inputs listed in
@@ -46,7 +52,7 @@ After recovering the bundle:
    training record using the existing strict checkpoint loader.
 2. Use the paper arm `shared_bias_program_role_source` at step 9,143. Preserve its vocabulary,
    training-fold prior, 32 flow steps and `strict_reaction_core_saturation_argmax` decoder.
-3. Provide and run a bounded example from a fresh checkout, with explicit seed, device and sample
+3. Run the provided bounded example from a fresh checkout, with explicit seed, device and sample
    count. Retain every attempt and its validation outcome, plus input hashes and output provenance.
 4. Document the measured runtime, memory, installation command and actual output format. Mark the
    small example as a usability check; it does not reproduce the paper's full evaluation.
@@ -61,8 +67,8 @@ Neither is an already-qualified lightweight step-9143 demo. No such demo has bee
   the weights and required data. Do not replace a missing file with a similarly named model.
 - Keep locked installation instructions and CI results, including missing-artifact skips, visible.
   Existing CI verifies software contracts; it does not demonstrate paper-checkpoint inference.
-- Resolve release licensing: package metadata declares MIT, but this checkout has no standalone
-  license file. Code licensing does not itself establish redistribution rights for weights or data.
+- The standalone [MIT license](../../LICENSE) now matches the existing package metadata. Confirm
+  applicable redistribution rights for the checkpoint bundle and any externally supplied data.
 - Keep [artifact replay instructions](ARTIFACTS.md#data-and-table-regeneration) separate from fresh
   evaluation, and retain the disclosures about missing historical source/runtime information.
 

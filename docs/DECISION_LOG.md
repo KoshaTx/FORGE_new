@@ -24260,3 +24260,30 @@ Added a reviewer-release checklist identifying checkpoint companions, direct eva
 bounded-generation qualification and distribution gaps. Clarified that remaining laboratory details
 do not block a computational code release. No weights were loaded, scientific inputs changed or
 paid compute launched during this search.
+
+## 2026-09-30 — Prepare bounded generation while the paper bundle is recovered
+
+Added `python -m cli.generate` with reaction family, attempt count, sampling seed, device,
+checkpoint location and output directory options. It hashes all direct inputs before importing the
+neural runtime, binds each training replicate to its recorded archive/training/design identities,
+and uses the existing strict archive loader, training-fold layout prior, sampler and exact-L1
+adjudication. The paper arm, final step 9,143, 32 flow steps and core-saturation decoder are fixed.
+No historical scientific implementation, sampling contract or evidence asset was rewritten.
+
+Every attempt is retained in JSONL and CSV, with counts, seeds, source/input/output hashes and
+software versions in the summary. There is no top-up, ranking, route assessment or property
+guidance. Output directories cannot be reused; failure produces no completed run directory.
+The wrapper reports that paper-checkpoint end-to-end qualification remains pending.
+
+Verified that seven direct non-bundle inputs, including the production cache and chemistry
+registries, are already committed and match the seed configurations. The three missing inputs
+per replicate are the checkpoint archive, training result and production design. Added the
+quickstart and an index of existing paper/smoke examples, preserving their original paths and
+distinguishing them from new wrapper outputs. Added the standard MIT license corresponding to
+the existing package declaration; third-party model/data/publication terms remain separate.
+
+Local checks: 14 input/CLI/output tests passed; three additional runtime cases passed using the
+explicitly separate two-step smoke model, testing all three reaction programs and repeated-seed
+determinism. Local runtime was Torch 2.11.0 / RDKit 2026.03.6; this is not the frozen Linux runtime.
+Changed-file lint and typing passed. Added these tests to locked Linux CI; that run remains required.
+The actual paper checkpoint has not been loaded or generated from. No cloud compute was launched.

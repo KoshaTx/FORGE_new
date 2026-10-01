@@ -63,8 +63,6 @@ jobs:
         run: uv sync --frozen --extra dev --extra torch
       - name: Check reviewer verifier failure modes
         run: uv run --frozen pytest -q tests/test_review_submission.py tests/test_ci_frozen.py tests/test_ci_provenance.py tests/test_public_data_fetch.py tests/test_external_artifact_requirements.py tests/test_potency_stage_contract.py
-      - name: Check generation wrapper with separate smoke weights
-        run: uv run --frozen pytest -q tests/test_reviewer_generation.py --junitxml=build/reviewer-generation-tests.xml
       - name: Check zero-initialized adapter identity
         if: ${{ !cancelled() && steps.install.outcome == 'success' }}
         run: >-
@@ -87,7 +85,5 @@ jobs:
         if: ${{ !cancelled() }}
         with:
           name: core-test-results
-          path: |
-            build/core-tests.xml
-            build/reviewer-generation-tests.xml
+          path: build/core-tests.xml
           if-no-files-found: error

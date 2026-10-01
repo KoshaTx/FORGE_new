@@ -13,6 +13,8 @@ SHA-256: `96e1a21b3be3d59431ef1f9c256171a8fcba984305a03999f32f1d35dc66fa35`.
 2. Use [EVIDENCE.md](EVIDENCE.md) to navigate from each table, figure and method to its files.
 3. Run `make review-check` from the repository root. It needs only Python 3.10+ and no network.
 4. Read [ARTIFACTS.md](ARTIFACTS.md) before attempting generation or numerical reproduction.
+   The [quickstart](QUICKSTART.md) provides the input check and bounded generation command;
+   [examples](../../examples/README.md) distinguishes paper illustrations from engineering smoke outputs.
 5. Read Appendix A.8 and the [historical implementation record](../v1_iclr/mathematical_review.json)
    for the boundary between present-day code and the code used for historical runs.
 

@@ -4,7 +4,8 @@
 
 [Paper](paper/submission/FORGE.pdf) · [Reviewer guide](paper/submission/README.md) ·
 [Paper → code and results](paper/submission/EVIDENCE.md) ·
-[Data and checkpoints](paper/submission/ARTIFACTS.md)
+[Data and checkpoints](paper/submission/ARTIFACTS.md) ·
+[Generation quickstart](paper/submission/QUICKSTART.md) · [Examples](examples/README.md)
 
 FORGE (**Flow-matched, Open-ended, Route-resolved Generation and Exploration**) generates
 complete molecular graphs conditioned on an assembly reaction program. The program supplies
@@ -77,6 +78,16 @@ inputs from public downloads alone. The [test guide](docs/TESTING.md) explains h
 already-pinned public LNPDB input and how unavailable historical tests are reported. The current
 lockfile is a development environment, not a recovered historical training environment.
 
+The [generation quickstart](paper/submission/QUICKSTART.md) provides a bounded three-family
+sampling command and an input-only check:
+
+```sh
+uv run --frozen python -m cli.generate --check-inputs
+```
+
+It reports missing paper checkpoints/companion records before loading any model. The wrapper is
+tested with fixtures and a separate small smoke model; paper-checkpoint generation remains pending.
+
 | Directory | Purpose |
 |---|---|
 | [`forge/model/`](forge/model) and [`forge/flow/`](forge/flow) | Graph representation, conditioned Transformer, training and discrete-flow sampling |
@@ -92,3 +103,9 @@ Contributors: read [AGENTS.md](AGENTS.md), the [architecture](docs/ARCHITECTURE.
 [study map](docs/STUDIES.md). Historical paths remain stable because evidence records refer to
 their exact bytes. The legacy `forge paper verify/reproduce/build` commands target the archived
 **v0** paper; they do not validate or rebuild the submitted PDF linked above.
+
+## License
+
+Project code is released under the [MIT License](LICENSE), matching the existing package declaration.
+Third-party data, weights and publication assets retain their applicable terms; the code license
+does not grant additional redistribution rights for those materials.

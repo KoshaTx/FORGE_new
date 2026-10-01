@@ -60,6 +60,17 @@ for a paper reproduction claim.
 
 ## Choosing a test scope
 
+The reviewer generation wrapper has a focused check:
+
+```sh
+uv run --frozen pytest -q tests/test_reviewer_generation.py
+```
+
+It verifies input/CLI/output behavior and explicitly uses the committed small smoke archive for
+runtime checks across all three programs. It does not admit those smoke weights through the public
+paper-checkpoint input check or claim paper-model qualification. The core CI job runs these checks
+with Torch installed and uploads their JUnit report alongside the core-test report.
+
 Use the smallest relevant check during development. The repository-wide suite includes complete
 corpus rebuilds, byte-reproducibility runs, model exercises, and verification of historical
 experiment artifacts. Historical reproduction is separate from new training readiness; missing
