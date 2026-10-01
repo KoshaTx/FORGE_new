@@ -178,7 +178,7 @@ def _install(timer: PhaseTimer, patches: _Patches) -> None:
         with timer.phase("checkpoint.unpack_and_build_model"):
             model, package = original_load(*args, **kwargs)
         patched = timer.wrap("sample.model_forward", model.forward)
-        model.forward = patched
+        model.forward = patched  # type: ignore[method-assign]
         return model, package
 
     patches.set(pe, "sample_synthesis_program_products", sample_products)

@@ -24235,3 +24235,9 @@ Assembly typing passed; the next type scope found four errors in Transformer ada
 Added concrete `Linear`/`Sequential` casts and bias checks while retaining the same construction
 order, parameter names and zero initialization. CI now also runs the existing specialist and role-local
 decoder identity tests for this change. The final Linux rerun remains required.
+
+Run `36804645073` (`1a7bd100`) passed all 191 executed core tests, explicitly skipped 11 cases
+requiring unavailable inputs, and passed both adapter identity tests. The first three typing scopes
+(42 assembly/core/CLI, 77 model/runtime, and 20 paper files) passed. The last tooling scope found one
+obsolete `type: ignore[method-assign]` on an already dynamically typed profiling wrapper; removed
+that comment without changing runtime behavior. The final push still requires a green CI result.
