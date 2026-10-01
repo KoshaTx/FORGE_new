@@ -24176,3 +24176,20 @@ artifacts, expected/current hashes and recovery sources are recorded in
 `docs/ci_provenance_recovery.json`. No exception ledger or acceptance threshold was
 changed. The broad CI gate remains failing until the missing originals are supplied;
 this repair does not claim full numerical reproduction or a green full core suite.
+
+## 2026-09-30 — Separate current-code CI from historical availability
+
+Authorized reviewer cleanup now compares evidence against the PR base checkout instead of letting
+pre-existing historical drift prevent code tests from running. The new comparison fails on removed
+declarations, lost verified identities, archive removal/corruption, malformed JSON and newly
+unresolved declarations. It does not accept old gaps as verified or edit historical digests. Both
+checkouts use the same verifier, including config and experiment declarations; no count allowance
+can offset a new loss. CI publishes the full unresolved inventory with an explicit INCOMPLETE
+availability summary. `make verify-pins` and the combined `make check-core` stay strict.
+
+Typing, lint and core tests now run independently after installation. The original test selection
+is preserved. Local validation: 30 reviewer/CI tests passed, the existing core lint selection passed,
+and all 121 paper assets plus the stated conditioned-table arithmetic passed. The real comparison
+against baseline `413767a3a12df3392ebb9492522bf8f2dab68085` found no evidence regressions. Broader
+locked Linux code checks remain to be qualified; this entry does not claim production readiness,
+historical reproduction or resolution of the manuscript/experimental-record discrepancy.

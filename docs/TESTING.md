@@ -1,5 +1,39 @@
 # Test workflow
 
+## Pull-request checks and historical evidence
+
+CI runs paper review, study compatibility, evidence regression, and core code checks separately.
+Within the core job, typing, linting and tests each run after a successful dependency installation,
+even when another check fails. Local equivalents are `make typecheck`, `make lint-core`, and
+`make test-core`; their existing selections and assertions are retained.
+
+The evidence regression job compares the candidate checkout with the PR base commit (or the
+previous commit on a push). It scans `results/`, `docs/provenance/`, `configs/`, and `experiments/`
+using the same verifier for both trees. It fails on any removed declaration, lost previously
+available path/hash identity, removed archive identity, or newly unresolved declaration. Recovering
+one identity cannot compensate for losing another. All archive blobs are checked, and malformed
+JSON fails instead of silently disappearing from the inventory. The known-drift exception ledger
+does not exempt an identity from this comparison.
+
+The `historical-evidence-audit` CI artifact lists the remaining unavailable and external inputs.
+Its summary explicitly says **INCOMPLETE** when local declarations remain unresolved. These include
+maintenance inventories and other studies, not only the submitted paper. A green regression check
+means this change introduced no new evidence loss; it does **not** certify historical reproduction.
+
+To compare against a separate, clean checkout of the base revision:
+
+```sh
+PYTHONPATH=.:tools python3 -m forge_provenance.regression \
+  --base-root /path/to/base-checkout --output /tmp/forge-provenance-regression.json
+```
+
+`make verify-pins` and `make check-core` retain their strict historical drift checks. No old hashes
+or exception allowances are changed. Paper-specific availability is checked separately by
+`make review-check` and `python3 tools/review_submission.py --require-run-artifacts`; see
+[`paper/submission/ARTIFACTS.md`](../paper/submission/ARTIFACTS.md) for the missing paper inputs.
+
+## Choosing a test scope
+
 Use the smallest relevant check during development. The repository-wide suite includes complete
 corpus rebuilds, byte-reproducibility runs, model exercises, and verification of historical
 experiment artifacts. Historical reproduction is separate from new training readiness; missing

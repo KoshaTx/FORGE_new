@@ -24,7 +24,7 @@
 	phase1-training-smoke phase1-training-modal-plan phase1-sampling-smoke \
 	phase1-sampling-reproduce paper-experiment-readiness paper-verify manuscript-pdf manuscript-iclr \
 	paper-bundle code-survey test-baseline-report assessment-benchmark evaluation-profile \
-	typecheck check-core \
+	typecheck check-core lint-core test-core \
 	test test-full test-one test-preparation test-training test-study-compatibility lint fmt clean
 
 EXPECT_PINS ?= 822
@@ -356,7 +356,9 @@ typecheck:
 	MYPYPATH=.:paper python3 -m mypy paper/forge_paper
 	MYPYPATH=.:tools python3 -m mypy tools/forge_provenance tools/forge_data tools/forge_maintenance
 
-check-core: verify-pins typecheck
+check-core: verify-pins typecheck lint-core test-core
+
+lint-core:
 	python3 -m ruff check forge cli experiments/_runtime experiments/phase1 tools \
 		tests/test_architecture_boundaries.py tests/test_assembly_ugi3.py \
 		tests/test_reaction_program.py tests/test_multireaction_corpus.py \
@@ -385,6 +387,8 @@ check-core: verify-pins typecheck
 		tests/test_paper_experiment_matrix.py tests/test_paper_reproduction.py \
 		tests/test_phase1_product_l1_data.py \
 		tests/test_pinned_sources_are_tracked.py
+
+test-core:
 	python3 -m pytest -q tests/test_architecture_boundaries.py tests/test_assembly_ugi3.py \
 		tests/test_reaction_program.py tests/test_multireaction_corpus.py \
 		tests/test_multireaction_expansion.py \

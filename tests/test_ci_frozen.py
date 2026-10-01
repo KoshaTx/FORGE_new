@@ -47,3 +47,22 @@ def test_all_committed_historical_archive_blobs_match_their_digest() -> None:
     for entry in manifest["entries"]:
         payload = (ROOT / entry["blob_path"]).read_bytes()
         assert hashlib.sha256(payload).hexdigest() == entry["sha256"], entry["original_path"]
+
+
+def test_ci_runs_code_checks_independently_of_historical_availability() -> None:
+    workflow = yaml.safe_load((ROOT / ".github/workflows/ci.yml").read_text())
+    steps = workflow["jobs"]["core"]["steps"]
+    for target in ("typecheck", "lint-core", "test-core"):
+        step = next(step for step in steps if step.get("run") == f"uv run --frozen make {target}")
+        assert "!cancelled()" in step["if"]
+        assert "steps.install.outcome == 'success'" in step["if"]
+    assert "evidence-regression" in workflow["jobs"]
+    result = subprocess.run(
+        ["make", "--dry-run", "test-core"],
+        cwd=ROOT,
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+    assert "provenance verify" not in result.stdout
+    assert "pytest" in result.stdout
