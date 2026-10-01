@@ -3,18 +3,9 @@ name: FORGE core checks
 on:
   pull_request:
   push:
-    branches: [main, master]
+    branches: [main]
 
 jobs:
-  submission-review:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: '3.12'
-      - name: Verify submitted-paper assets and conditioned seed arithmetic
-        run: make review-check
   study-compatibility:
     runs-on: ubuntu-latest
     steps:
@@ -25,7 +16,7 @@ jobs:
       - name: Install locked development environment
         run: uv sync --frozen --extra dev --extra torch
       - name: Check both study interfaces without training
-        run: uv run --frozen make test-study-compatibility
+        run: uv run make test-study-compatibility
   core:
     runs-on: ubuntu-latest
     steps:
@@ -35,7 +26,5 @@ jobs:
           enable-cache: true
       - name: Install locked development environment
         run: uv sync --frozen --extra dev --extra torch
-      - name: Check reviewer verifier failure modes
-        run: uv run --frozen pytest -q tests/test_review_submission.py tests/test_ci_frozen.py
       - name: Verify architecture, provenance, and runner contracts
-        run: uv run --frozen make check-core
+        run: uv run make check-core

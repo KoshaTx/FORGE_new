@@ -24155,3 +24155,24 @@ incorrect denominators, duplicate seeds, sample-SD drift and path escape. Change
 files pass lint and formatting checks. No model inference, training, cloud compute,
 scientific threshold changes or new experimental results were introduced. Work remains
 on `review/paper-alignment` for teammate review, without merging to the default branch.
+
+
+## Reviewer-branch CI provenance recovery
+
+The first reviewer-branch CI run passed paper integrity, all 13 reviewer tests and
+study compatibility, but failed the broad historical provenance gate. Its later
+`uv run` commands also rewrote uv.lock after the frozen install. All CI invocations
+and the Makefile's default UV_RUN now retain `--frozen`.
+
+Recovered 88 exact historical versions by SHA-256 from retained Git objects and
+packed validation artifacts, preserving all 536 existing archive entries. All 624
+archive entries verify. Twenty focused tests pass, including lockfile-preservation
+configuration checks, archive corruption rejection and submission verification.
+
+The unchanged starting commit 413767a3 already had 503 failed pin declarations.
+After recovery, 195 declarations referencing 136 versions remain unresolved; none
+is newly unresolved relative to that starting commit. The exact paths, declaring
+artifacts, expected/current hashes and recovery sources are recorded in
+`docs/ci_provenance_recovery.json`. No exception ledger or acceptance threshold was
+changed. The broad CI gate remains failing until the missing originals are supplied;
+this repair does not claim full numerical reproduction or a green full core suite.
